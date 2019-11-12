@@ -1,0 +1,137 @@
+{
+  "VanishingGradient": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "VanishingGradient",
+      "RuleParameters": {
+        "rule_to_invoke": "VanishingGradient"
+      }
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "gradients"
+      }
+    ]
+  },
+  "LossNotDecreasing" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "LossNotDecreasing",
+      "RuleParameters": {
+        "rule_to_invoke": "LossNotDecreasing"
+      }
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "losses"
+      }
+    ]
+  },
+  "WeightUpdateRatio": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "WeightUpdateRatio",
+      "RuleParameters": {
+        "rule_to_invoke": "WeightUpdateRatio"
+      }
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "weights"
+      }
+    ]
+  },
+  "CheckInputImages" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "CheckInputImages",
+      "RuleParameters": {
+        "rule_to_invoke": "CheckInputImages"
+      }
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "input_image",
+        "CollectionParameters": {
+          "include_regex": ".*hybridsequential0_input_0"
+        }
+      }
+    ]
+  },
+  "DeadRelu" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "DeadRelu",
+      "RuleParameters": {
+        "rule_to_invoke": "DeadRelu"
+      }
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "relu_output",
+        "CollectionParameters": {
+          "include_regex": ".*relu_output"
+        }
+      }
+    ]
+  },
+  "AllZero": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "AllZero",
+      "RuleParameters": {
+        "rule_to_invoke": "AllZero"
+      }
+    }
+  },
+  "ExplodingTensor" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "ExplodingTensor",
+      "RuleParameters": {
+        "rule_to_invoke": "ExplodingTensor"
+      }
+    }
+  },
+  "UnchangedTensor" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "UnchangedTensor",
+      "RuleParameters": {
+        "rule_to_invoke": "UnchangedTensor"
+      }
+    }
+  },
+  "SimilarAcrossRuns": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "SimilarAcrossRuns",
+      "RuleParameters": {
+        "rule_to_invoke": "SimilarAcrossRuns"
+      }
+    }
+  },
+  "TreeDepth": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "TreeDepth",
+      "RuleParameters": {
+        "rule_to_invoke": "TreeDepth"
+      }
+    }
+  },
+  "ClassImbalance": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "ClassImbalance",
+      "RuleParameters": {
+        "rule_to_invoke": "ClassImbalance"
+      }
+    }
+  },
+  "Confusion": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "Confusion",
+      "RuleParameters": {
+        "rule_to_invoke": "Confusion"
+      }
+    }
+  },
+  "Overfit": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "Overfit",
+      "RuleParameters": {
+        "rule_to_invoke": "Overfit"
+      }
+    }
+  }
+ }
