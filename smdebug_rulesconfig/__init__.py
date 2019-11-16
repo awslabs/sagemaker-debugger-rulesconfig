@@ -13,6 +13,6 @@ from ._1PRules import class_imbalance
 from ._1PRules import confusion
 from ._1PRules import overfit
 from ._1PRules import tree_depth
-from ._1PRules import mxnet_simple_rules
-from ._1PRules import tensorflow_simple_rules, xgboost_simple_rules, pytorch_simple_rules
+from ._1PRules import get_rule_groups
+from ._ruleGroups import MXNET, TENSORFLOW, XGBOOST, PYTORCH
 

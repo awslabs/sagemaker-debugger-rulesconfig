@@ -92,27 +92,12 @@ def overfit() :
     rule_config = _get_rule_config("Overfit")
     return rule_config
 
-def mxnet_simple_rules():
-    rules_list = _get_rule_list("MXNET", "SIMPLE")
-    rules_config = _get_config_for_group(rules_list)
+def get_rule_groups(ruleEnum):
+    ruleEnumVal = ruleEnum.value
+    rules_config = _get_config_for_group(ruleEnumVal)
     return rules_config
-
-def xgboost_simple_rules():
-    rules_list = _get_rule_list("XGBOOST", "SIMPLE")
-    rules_config = _get_config_for_group(rules_list)
-    return rules_config
-
-def tensorflow_simple_rules():
-    rules_list = _get_rule_list("TENSORFLOW", "SIMPLE")
-    rules_config = _get_config_for_group(rules_list)
-    return rules_config
-
-def pytorch_simple_rules():
-    rules_list = _get_rule_list("PYTORCH", "SIMPLE")
-    rules_config = _get_config_for_group(rules_list)
-    return rules_config
-
 
 if __name__ == "__main__":
     vanishing_gradient()
     mxnet_simple_rules()
+
