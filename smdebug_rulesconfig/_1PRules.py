@@ -97,7 +97,4 @@ def get_rule_groups(ruleEnum):
     rules_config = _get_config_for_group(ruleEnumVal)
     return rules_config
 
-if __name__ == "__main__":
-    vanishing_gradient()
-    mxnet_simple_rules()
 
