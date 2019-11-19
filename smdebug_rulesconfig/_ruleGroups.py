@@ -1,4 +1,5 @@
 from enum import Enum
+from ._utils import _get_config_for_group
 
 class MXNET(Enum):
     SIMPLE = [
@@ -30,3 +31,8 @@ class XGBOOST(Enum):
             "ClassImbalance"
         ]
     ALL = []
+
+def get_rule_groups(ruleEnum):
+    ruleEnumVal = ruleEnum.value
+    rules_config = _get_config_for_group(ruleEnumVal)
+    return rules_config

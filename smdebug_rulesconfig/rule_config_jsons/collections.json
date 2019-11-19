@@ -1,0 +1,20 @@
+{
+  "weights": {
+    "CollectionName": "weights"
+  },
+  "gradients": {
+    "CollectionName": "gradients"
+  },
+  "losses": {
+    "CollectionName": "losses"
+  },
+  "input_image": {
+    "CollectionName": "input_image",
+    "CollectionParameters": {
+      "include_regex": ".*hybridsequential0_input_0"
+    }
+  },
+  "relu_output": {
+    "include_regex": ".*relu_output"
+  }
+}
