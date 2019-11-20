@@ -53,4 +53,26 @@ def overfit() :
     return rule_config
 
 
+def tensor_variance():
+    rule_config = _get_rule_config("TensorVariance")
+    return rule_config
 
+
+def overtraining():
+    rule_config = _get_rule_config("Overtraining")
+    return rule_config
+
+
+def poor_weight_initialization():
+    rule_config = _get_rule_config("PoorWeightInitialization")
+    return rule_config
+
+
+def saturated_activation():
+    rule_config = _get_rule_config("SaturatedActivation")
+    return rule_config
+
+
+def nlp_sequence_ratio():
+    rule_config = _get_rule_config("NLPSequenceRatio")
+    return rule_config

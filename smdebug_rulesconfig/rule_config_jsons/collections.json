@@ -16,5 +16,14 @@
   },
   "relu_output": {
     "include_regex": ".*relu_output"
+  },
+  "relu_input": {
+    "include_regex": ".*relu_input"
+  },
+  "input_sequence": {
+    "CollectionName": "input_sequence",
+    "CollectionParameters": {
+      "include_regex": ".*embedding0_input_0"
+    }
   }
 }
