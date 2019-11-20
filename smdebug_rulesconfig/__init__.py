@@ -14,9 +14,4 @@ from ._1PRules import confusion
 from ._1PRules import overfit
 from ._1PRules import tree_depth
 
-from ._collections import weights
-from ._collections import gradients
-from ._collections import losses
-from ._collections import input_image
-from ._collections import relu_output
-
+from ._collections import get_collection
