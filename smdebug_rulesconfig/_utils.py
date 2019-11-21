@@ -1,11 +1,11 @@
 import json
 import os
-from pathlib import Path
 from ._constants import RULE_CONFIG_FILE, RULE_GROUPS_CONFIG_FILE, COLLECTION_CONFIG_FILE
 
 def _get_rule_config(rule_name):
     rule_config = None
-    config_file_path = str(Path(__file__).parent.absolute()) + "/" + RULE_CONFIG_FILE
+
+    config_file_path = os.path.dirname(os.path.abspath(__file__)) + "/" + RULE_CONFIG_FILE
 
     if os.path.exists(config_file_path):
         with open(config_file_path) as json_data:
@@ -16,7 +16,9 @@ def _get_rule_config(rule_name):
 
 def _get_rule_list(framework, type):
     rules_list = []
-    config_file_path = str(Path(__file__).parent.absolute()) + "/" + RULE_GROUPS_CONFIG_FILE
+
+    config_file_path = os.path.dirname(os.path.abspath(__file__)) + "/" + RULE_GROUPS_CONFIG_FILE
+
     if os.path.exists(config_file_path):
         with open(config_file_path) as json_data:
             configs = json.load(json_data)
@@ -27,7 +29,8 @@ def _get_rule_list(framework, type):
 
 def _get_config_for_group(rules):
     rules_config = []
-    config_file_path = str(Path(__file__).parent.absolute()) + "/" + RULE_CONFIG_FILE
+
+    config_file_path = os.path.dirname(os.path.abspath(__file__)) + "/" + RULE_CONFIG_FILE
 
     if os.path.exists(config_file_path):
         with open(config_file_path) as json_data:

@@ -134,5 +134,61 @@
         "rule_to_invoke": "Overfit"
       }
     }
+  },
+  "TensorVariance" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "TensorVariance",
+      "RuleParameters": {
+        "rule_to_invoke": "TensorVariance"
+      }
+    }
+  },
+  "Overtraining": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "Overtraining",
+      "RuleParameters": {
+        "rule_to_invoke": "Overtraining"
+      }
+    }
+  },
+  "PoorWeightInitialization" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "PoorWeightInitialization",
+      "RuleParameters": {
+        "rule_to_invoke": "PoorWeightInitialization"
+      }
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "relu_input",
+        "CollectionParameters": {
+          "include_regex": ".*relu_input"
+        }
+      }
+    ]
+  },
+  "SaturatedActivation" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "SaturatedActivation",
+      "RuleParameters": {
+        "rule_to_invoke": "SaturatedActivation"
+      }
+    }
+  },
+  "NLPSequenceRatio" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "NLPSequenceRatio",
+      "RuleParameters": {
+        "rule_to_invoke": "NLPSequenceRatio"
+      }
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "input_sequence",
+        "CollectionParameters": {
+          "include_regex": ".*embedding0_input_0"
+        }
+      }
+    ]
   }
  }
