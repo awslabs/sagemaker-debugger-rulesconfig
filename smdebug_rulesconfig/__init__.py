@@ -19,3 +19,4 @@ from ._1PRules import poor_weight_initialization
 from ._1PRules import saturated_activation
 from ._1PRules import nlp_sequence_ratio
 
+from ._collections import get_collection

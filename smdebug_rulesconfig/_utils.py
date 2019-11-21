@@ -41,3 +41,14 @@ def _get_config_for_group(rules):
     return rules_config
 
 
+def _get_collection_config(collection_name):
+    coll_config = None
+
+    config_file_path = os.path.dirname(os.path.abspath(__file__)) + "/" + COLLECTION_CONFIG_FILE
+
+    if os.path.exists(config_file_path):
+        with open(config_file_path) as json_data:
+            configs = json.load(json_data)
+            if collection_name in configs:
+                coll_config = configs[collection_name]
+    return coll_config
