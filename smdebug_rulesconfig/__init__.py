@@ -13,6 +13,9 @@ from ._1PRules import class_imbalance
 from ._1PRules import confusion
 from ._1PRules import overfit
 from ._1PRules import tree_depth
-
-
+from ._1PRules import tensor_variance
+from ._1PRules import overtraining
+from ._1PRules import poor_weight_initialization
+from ._1PRules import saturated_activation
+from ._1PRules import nlp_sequence_ratio
 
