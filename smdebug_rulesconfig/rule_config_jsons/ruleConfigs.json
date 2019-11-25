@@ -4,7 +4,8 @@
       "RuleConfigurationName": "VanishingGradient",
       "RuleParameters": {
         "rule_to_invoke": "VanishingGradient"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     },
     "CollectionConfigurations": [
       {
@@ -18,7 +19,8 @@
       "RuleParameters": {
         "rule_to_invoke": "LossNotDecreasing",
         "mode" : "TRAIN"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     },
     "CollectionConfigurations": [
       {
@@ -31,7 +33,8 @@
       "RuleConfigurationName": "WeightUpdateRatio",
       "RuleParameters": {
         "rule_to_invoke": "WeightUpdateRatio"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     },
     "CollectionConfigurations": [
       {
@@ -44,7 +47,8 @@
       "RuleConfigurationName": "CheckInputImages",
       "RuleParameters": {
         "rule_to_invoke": "CheckInputImages"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     },
     "CollectionConfigurations": [
       {
@@ -60,7 +64,8 @@
       "RuleConfigurationName": "DeadRelu",
       "RuleParameters": {
         "rule_to_invoke": "DeadRelu"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     },
     "CollectionConfigurations": [
       {
@@ -76,7 +81,8 @@
       "RuleConfigurationName": "AllZero",
       "RuleParameters": {
         "rule_to_invoke": "AllZero"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     }
   },
   "ExplodingTensor" : {
@@ -84,7 +90,8 @@
       "RuleConfigurationName": "ExplodingTensor",
       "RuleParameters": {
         "rule_to_invoke": "ExplodingTensor"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     }
   },
   "UnchangedTensor" : {
@@ -92,7 +99,8 @@
       "RuleConfigurationName": "UnchangedTensor",
       "RuleParameters": {
         "rule_to_invoke": "UnchangedTensor"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     }
   },
   "SimilarAcrossRuns": {
@@ -100,7 +108,8 @@
       "RuleConfigurationName": "SimilarAcrossRuns",
       "RuleParameters": {
         "rule_to_invoke": "SimilarAcrossRuns"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     }
   },
   "TreeDepth": {
@@ -108,7 +117,8 @@
       "RuleConfigurationName": "TreeDepth",
       "RuleParameters": {
         "rule_to_invoke": "TreeDepth"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     }
   },
   "ClassImbalance": {
@@ -116,7 +126,8 @@
       "RuleConfigurationName": "ClassImbalance",
       "RuleParameters": {
         "rule_to_invoke": "ClassImbalance"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     }
   },
   "Confusion": {
@@ -124,7 +135,8 @@
       "RuleConfigurationName": "Confusion",
       "RuleParameters": {
         "rule_to_invoke": "Confusion"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     }
   },
   "Overfit": {
@@ -132,7 +144,8 @@
       "RuleConfigurationName": "Overfit",
       "RuleParameters": {
         "rule_to_invoke": "Overfit"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     }
   },
   "TensorVariance" : {
@@ -140,7 +153,8 @@
       "RuleConfigurationName": "TensorVariance",
       "RuleParameters": {
         "rule_to_invoke": "TensorVariance"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     }
   },
   "Overtraining": {
@@ -148,7 +162,8 @@
       "RuleConfigurationName": "Overtraining",
       "RuleParameters": {
         "rule_to_invoke": "Overtraining"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     }
   },
   "PoorWeightInitialization" : {
@@ -156,7 +171,8 @@
       "RuleConfigurationName": "PoorWeightInitialization",
       "RuleParameters": {
         "rule_to_invoke": "PoorWeightInitialization"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     },
     "CollectionConfigurations": [
       {
@@ -172,7 +188,8 @@
       "RuleConfigurationName": "SaturatedActivation",
       "RuleParameters": {
         "rule_to_invoke": "SaturatedActivation"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     }
   },
   "NLPSequenceRatio" : {
@@ -180,7 +197,8 @@
       "RuleConfigurationName": "NLPSequenceRatio",
       "RuleParameters": {
         "rule_to_invoke": "NLPSequenceRatio"
-      }
+      },
+      "InstanceType": "ml.t3.medium"
     },
     "CollectionConfigurations": [
       {
