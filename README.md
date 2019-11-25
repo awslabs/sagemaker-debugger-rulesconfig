@@ -4,7 +4,7 @@ Sagemaker-debugger is an upcoming AWS service designed to be a debugger for mach
 
 SageMaker Debugger RulesConfig provides a mapping of builtin rules with default configurations. These configurations will affect both DebugHookConfig and DebugRuleConfigurations in the SageMaker Python SDK.
 
-This library, intended to be used with SageMaker PySDK, helps you specify builtin rules without worrying about any details or tweak the configuration of builtin rules. These builtin rules are available in SageMaker through the [sagemaker-debugger-rules](https://github.com/awslabs/sagemaker-debugger-rules) package. 
+This library, intended to be used with SageMaker PySDK, helps you specify builtin rules without worrying about any details or tweak the configuration of builtin rules. These builtin rules are available in SageMaker.
 
 SageMaker Debugger Rulesconfig package can be used with SageMaker Debugger or as stand-alone rule config retriever too. In addition to retrieving builtin rules, configuration for common collections can be retrieved as well.
 
