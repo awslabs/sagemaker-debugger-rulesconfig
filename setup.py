@@ -10,8 +10,7 @@ def build_rule_config_package(version):
     setuptools.setup(
         name="smdebug_rulesconfig",
         version=version,
-        author="The SMDebug Team",
-        author_email="tornasole@amazon.com",
+        author="AWS DeepLearning Team",
         description="SMDebug RulesConfig",
         url="https://github.com/awslabs/sagemaker-debugger-rulesconfig",
         packages=["smdebug_rulesconfig"],
