@@ -1,0 +1,212 @@
+{
+  "VanishingGradient": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "VanishingGradient",
+      "RuleParameters": {
+        "rule_to_invoke": "VanishingGradient"
+      },
+      "InstanceType": "ml.t3.medium"
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "gradients"
+      }
+    ]
+  },
+  "LossNotDecreasing" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "LossNotDecreasing",
+      "RuleParameters": {
+        "rule_to_invoke": "LossNotDecreasing",
+        "mode" : "TRAIN"
+      },
+      "InstanceType": "ml.t3.medium"
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "losses"
+      }
+    ]
+  },
+  "WeightUpdateRatio": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "WeightUpdateRatio",
+      "RuleParameters": {
+        "rule_to_invoke": "WeightUpdateRatio"
+      },
+      "InstanceType": "ml.t3.medium"
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "weights"
+      }
+    ]
+  },
+  "CheckInputImages" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "CheckInputImages",
+      "RuleParameters": {
+        "rule_to_invoke": "CheckInputImages"
+      },
+      "InstanceType": "ml.t3.medium"
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "input_image",
+        "CollectionParameters": {
+          "include_regex": ".*hybridsequential0_input_0"
+        }
+      }
+    ]
+  },
+  "DeadRelu" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "DeadRelu",
+      "RuleParameters": {
+        "rule_to_invoke": "DeadRelu"
+      },
+      "InstanceType": "ml.t3.medium"
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "relu_output",
+        "CollectionParameters": {
+          "include_regex": ".*relu_output"
+        }
+      }
+    ]
+  },
+  "AllZero": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "AllZero",
+      "RuleParameters": {
+        "rule_to_invoke": "AllZero"
+      },
+      "InstanceType": "ml.t3.medium"
+    }
+  },
+  "ExplodingTensor" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "ExplodingTensor",
+      "RuleParameters": {
+        "rule_to_invoke": "ExplodingTensor"
+      },
+      "InstanceType": "ml.t3.medium"
+    }
+  },
+  "UnchangedTensor" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "UnchangedTensor",
+      "RuleParameters": {
+        "rule_to_invoke": "UnchangedTensor"
+      },
+      "InstanceType": "ml.t3.medium"
+    }
+  },
+  "SimilarAcrossRuns": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "SimilarAcrossRuns",
+      "RuleParameters": {
+        "rule_to_invoke": "SimilarAcrossRuns"
+      },
+      "InstanceType": "ml.t3.medium"
+    }
+  },
+  "TreeDepth": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "TreeDepth",
+      "RuleParameters": {
+        "rule_to_invoke": "TreeDepth"
+      },
+      "InstanceType": "ml.t3.medium"
+    }
+  },
+  "ClassImbalance": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "ClassImbalance",
+      "RuleParameters": {
+        "rule_to_invoke": "ClassImbalance"
+      },
+      "InstanceType": "ml.t3.medium"
+    }
+  },
+  "Confusion": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "Confusion",
+      "RuleParameters": {
+        "rule_to_invoke": "Confusion"
+      },
+      "InstanceType": "ml.t3.medium"
+    }
+  },
+  "Overfit": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "Overfit",
+      "RuleParameters": {
+        "rule_to_invoke": "Overfit"
+      },
+      "InstanceType": "ml.t3.medium"
+    }
+  },
+  "TensorVariance" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "TensorVariance",
+      "RuleParameters": {
+        "rule_to_invoke": "TensorVariance"
+      },
+      "InstanceType": "ml.t3.medium"
+    }
+  },
+  "Overtraining": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "Overtraining",
+      "RuleParameters": {
+        "rule_to_invoke": "Overtraining"
+      },
+      "InstanceType": "ml.t3.medium"
+    }
+  },
+  "PoorWeightInitialization" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "PoorWeightInitialization",
+      "RuleParameters": {
+        "rule_to_invoke": "PoorWeightInitialization"
+      },
+      "InstanceType": "ml.t3.medium"
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "relu_input",
+        "CollectionParameters": {
+          "include_regex": ".*relu_input"
+        }
+      }
+    ]
+  },
+  "SaturatedActivation" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "SaturatedActivation",
+      "RuleParameters": {
+        "rule_to_invoke": "SaturatedActivation"
+      },
+      "InstanceType": "ml.t3.medium"
+    }
+  },
+  "NLPSequenceRatio" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "NLPSequenceRatio",
+      "RuleParameters": {
+        "rule_to_invoke": "NLPSequenceRatio"
+      },
+      "InstanceType": "ml.t3.medium"
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "input_sequence",
+        "CollectionParameters": {
+          "include_regex": ".*embedding0_input_0"
+        }
+      }
+    ]
+  }
+ }
