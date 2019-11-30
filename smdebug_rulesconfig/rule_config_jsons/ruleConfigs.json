@@ -8,7 +8,10 @@
     },
     "CollectionConfigurations": [
       {
-        "CollectionName": "gradients"
+        "CollectionName": "gradients",
+        "CollectionParameters": {
+          "save_interval": "500"
+        }
       }
     ]
   },
@@ -21,7 +24,10 @@
     },
     "CollectionConfigurations": [
       {
-        "CollectionName": "losses"
+        "CollectionName": "losses",
+        "CollectionParameters": {
+          "save_interval": "500"
+        }
       }
     ]
   },
@@ -34,7 +40,11 @@
     },
     "CollectionConfigurations": [
       {
-        "CollectionName": "weights"
+        "CollectionName": "weights",
+        "CollectionParameters": {
+          "save_interval": "500"
+        }
+
       }
     ]
   },
@@ -49,7 +59,8 @@
       {
         "CollectionName": "input_image",
         "CollectionParameters": {
-          "include_regex": ".*hybridsequential0_input_0"
+          "include_regex": ".*hybridsequential0_input_0",
+          "save_interval": "500"
         }
       }
     ]
@@ -65,7 +76,8 @@
       {
         "CollectionName": "relu_output",
         "CollectionParameters": {
-          "include_regex": ".*relu_output"
+          "include_regex": ".*relu_output",
+          "save_interval": "500"
         }
       }
     ]
@@ -161,7 +173,8 @@
       {
         "CollectionName": "relu_input",
         "CollectionParameters": {
-          "include_regex": ".*relu_input"
+          "include_regex": ".*relu_input",
+          "save_interval": "500"
         }
       }
     ]
@@ -185,7 +198,8 @@
       {
         "CollectionName": "input_sequence",
         "CollectionParameters": {
-          "include_regex": ".*embedding0_input_0"
+          "include_regex": ".*embedding0_input_0",
+          "save_interval": "500"
         }
       }
     ]
