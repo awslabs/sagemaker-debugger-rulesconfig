@@ -19,8 +19,7 @@
     "DebugRuleConfiguration": {
       "RuleConfigurationName": "LossNotDecreasing",
       "RuleParameters": {
-        "rule_to_invoke": "LossNotDecreasing",
-        "mode" : "TRAIN"
+        "rule_to_invoke": "LossNotDecreasing"
       }
     },
     "CollectionConfigurations": [
