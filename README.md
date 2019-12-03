@@ -20,7 +20,7 @@ my_estimator = Estimator(
 )
 ```
 
-Example: Builtin rule with customization. For more details please refer to Amazon SageMaker Python SDK documentation.
+Example: Builtin rule with customization. For more details please refer to [Amazon SageMaker Python SDK](https://github.com/aws/sagemaker-python-sdk) documentation.
 
 ```
 my_estimator = Estimator(
@@ -38,7 +38,7 @@ my_estimator = Estimator(
             },
             collections_to_save=[
                 CollectionConfiguration(
-                    name="my_name",  # Required. If specified, the debugger will collect the tensors for this collection. The users may have to update the rule_parameters above to run the rule on right tensors.
+                    name="my_name",  # Required. If specified, debugger will collect tensors for this collection. Users may have to update rule_parameters above to run the rule on right tensors.
                     parameters= {
                         "param1": "value1",
                         "param2": "value2"

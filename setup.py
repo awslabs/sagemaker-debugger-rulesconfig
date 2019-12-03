@@ -2,7 +2,8 @@
 import setuptools
 
 long_description = (
-    "This library, intended to be used with Amazon SageMaker Python SDK, helps you specify builtin "
+    "This library, intended to be used with [Amazon SageMaker Python SDK]("
+    "https://github.com/aws/sagemaker-python-sdk), helps you specify builtin "
     "rules without worrying about any details or tweak the configuration of builtin rules. These "
     "builtin rules are available in Amazon SageMaker."
     "Amazon SageMaker Debugger Rulesconfig package can be used with Amazon SageMaker Debugger or as"
