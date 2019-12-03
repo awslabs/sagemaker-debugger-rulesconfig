@@ -4,9 +4,9 @@ Amazon SageMaker Debugger is designed to be a debugger for machine learning mode
 
 Amazon SageMaker Debugger RulesConfig provides a mapping of builtin rules with default configurations. These configurations will affect both DebugHookConfig and DebugRuleConfigurations in the Amazon SageMaker Python SDK.
 
-This library, intended to be used with Amazon SageMaker PySDK, helps you specify builtin rules without worrying about any details or tweak the configuration of builtin rules. These builtin rules are available in SageMaker.
+This library, intended to be used with Amazon SageMaker Python SDK, helps you specify builtin rules without worrying about any details or tweak the configuration of builtin rules. These builtin rules are available in Amazon SageMaker.
 
-Amazon SageMaker Debugger Rulesconfig package can be used with Amazon SageMaker Debugger or as stand-alone rule config retriever too. In addition to retrieving builtin rules, configuration for common collections can be retrieved as well.
+Amazon SageMaker Debugger Rulesconfig package can be used with Amazon SageMaker Debugger or as stand-alone rule config retriever. In addition to retrieving builtin rules, configuration for common collections can be retrieved as well.
 
 Example: Vanilla builtin rule without customization
 
@@ -32,8 +32,8 @@ my_estimator = Estimator(
             name="my_wup_rule_name",
             container_local_path="/local/path",
             s3_output_path="s3://uri",
-            rule_parameters={ 
-                "param1": "value1", 
+            rule_parameters={
+                "param1": "value1",
                 "param2": "value2"
             },
             collections_to_save=[
@@ -73,4 +73,3 @@ my_estimator = Estimator(
 ## License
 
 This project is licensed under the Apache-2.0 License.
-
