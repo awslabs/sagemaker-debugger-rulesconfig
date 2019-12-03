@@ -29,6 +29,7 @@ def build_rule_config_package(version):
             "Operating System :: OS Independent",
         ],
         python_requires=">=2.7",
+        license="Apache License Version 2.0",
     )
 
 
