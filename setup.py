@@ -3,6 +3,9 @@ import os
 import sys
 import setuptools
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 exec(open("smdebug_rulesconfig/_version.py").read())
 CURRENT_VERSION = __version__
 
@@ -12,6 +15,8 @@ def build_rule_config_package(version):
         version=version,
         author="AWS DeepLearning Team",
         description="SMDebug RulesConfig",
+        long_description=long_description,
+        long_description_content_type="text/markdown",
         url="https://github.com/awslabs/sagemaker-debugger-rulesconfig",
         packages=["smdebug_rulesconfig"],
         package_data={'smdebug_rulesconfig' : ['rule_config_jsons/*.json']},
