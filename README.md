@@ -1,12 +1,12 @@
-## SageMaker-Debugger-RulesConfig
+## Amazon SageMaker Debugger RulesConfig
 
-Sagemaker-debugger is an upcoming AWS service designed to be a debugger for machine learning models. It lets you go beyond just looking at scalars like losses and accuracies during training and gives you full visibility into all tensors 'flowing through the graph' during training or inference.
+Amazon SageMaker Debugger is designed to be a debugger for machine learning models. It lets you go beyond just looking at scalars like losses and accuracies during training and gives you full visibility into all tensors 'flowing through the graph' during training or inference.
 
-SageMaker Debugger RulesConfig provides a mapping of builtin rules with default configurations. These configurations will affect both DebugHookConfig and DebugRuleConfigurations in the SageMaker Python SDK.
+Amazon SageMaker Debugger RulesConfig provides a mapping of builtin rules with default configurations. These configurations will affect both DebugHookConfig and DebugRuleConfigurations in the Amazon SageMaker Python SDK.
 
-This library, intended to be used with SageMaker PySDK, helps you specify builtin rules without worrying about any details or tweak the configuration of builtin rules. These builtin rules are available in SageMaker.
+This library, intended to be used with Amazon SageMaker Python SDK, helps you specify builtin rules without worrying about any details or tweak the configuration of builtin rules. These builtin rules are available in Amazon SageMaker.
 
-SageMaker Debugger Rulesconfig package can be used with SageMaker Debugger or as stand-alone rule config retriever too. In addition to retrieving builtin rules, configuration for common collections can be retrieved as well.
+Amazon SageMaker Debugger Rulesconfig package can be used with Amazon SageMaker Debugger or as stand-alone rule config retriever. In addition to retrieving builtin rules, configuration for common collections can be retrieved as well.
 
 Example: Vanilla builtin rule without customization
 
@@ -20,7 +20,7 @@ my_estimator = Estimator(
 )
 ```
 
-Example: Builtin rule with customization
+Example: Builtin rule with customization. For more details please refer to [Amazon SageMaker Python SDK](https://github.com/aws/sagemaker-python-sdk) documentation.
 
 ```
 my_estimator = Estimator(
@@ -29,18 +29,16 @@ my_estimator = Estimator(
         Rule.sagemaker(vanishing_gradient()),
         Rule.sagemaker(
             base_config=weight_update_ratio(),
-            instance_type="t2.micro",
             name="my_wup_rule_name",
             container_local_path="/local/path",
             s3_output_path="s3://uri",
-            volume_size_in_gb=100,
             rule_parameters={
                 "param1": "value1",
                 "param2": "value2"
             },
-            collection_configurations=[
+            collections_to_save=[
                 CollectionConfiguration(
-                    name="my_name",  # Required
+                    name="my_name",  # Required. If specified, debugger will collect tensors for this collection. Users may have to update rule_parameters above to run the rule on right tensors.
                     parameters= {
                         "param1": "value1",
                         "param2": "value2"
@@ -75,4 +73,3 @@ my_estimator = Estimator(
 ## License
 
 This project is licensed under the Apache-2.0 License.
-
