@@ -11,7 +11,7 @@ Amazon SageMaker Debugger Rulesconfig package can be used with Amazon SageMaker 
 Example: Vanilla builtin rule without customization
 
 ```
-from sagemaker.debug import Rule
+from sagemaker.debugger import Rule
 from smdebug_rulesconfig import vanishing_gradient
 
 my_estimator = Estimator(
