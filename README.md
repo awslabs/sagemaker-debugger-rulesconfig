@@ -46,8 +46,7 @@ my_estimator = Estimator(
                 )
             ],
         )
-    ],
-    wait=False
+    ]
 )
 ```
 
@@ -65,8 +64,7 @@ my_estimator = Estimator(
                 get_collection("weights")
             ],
         )
-    ],
-    wait=False
+    ]
 )
 ```
 
