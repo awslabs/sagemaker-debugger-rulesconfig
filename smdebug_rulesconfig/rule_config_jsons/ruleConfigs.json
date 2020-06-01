@@ -203,5 +203,13 @@
         }
       }
     ]
+  },
+  "StalledTrainingRule" : {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "StalledTrainingRule",
+      "RuleParameters": {
+        "rule_to_invoke": "StalledTrainingRule"
+      }
+    }
   }
  }
