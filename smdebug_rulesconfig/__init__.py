@@ -17,5 +17,6 @@ from .builtin_rules import overtraining
 from .builtin_rules import poor_weight_initialization
 from .builtin_rules import saturated_activation
 from .builtin_rules import nlp_sequence_ratio
+from .builtin_rules import stalled_training_rule
 
 from ._collections import get_collection

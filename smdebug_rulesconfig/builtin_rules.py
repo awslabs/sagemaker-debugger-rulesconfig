@@ -76,3 +76,8 @@ def saturated_activation():
 def nlp_sequence_ratio():
     rule_config = _get_rule_config("NLPSequenceRatio")
     return rule_config
+
+def stalled_training_rule():
+    rule_config = _get_rule_config("StalledTrainingRule")
+    return rule_config
+
