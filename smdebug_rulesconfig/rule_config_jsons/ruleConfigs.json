@@ -211,5 +211,21 @@
         "rule_to_invoke": "StalledTrainingRule"
       }
     }
-  }
+  },
+   "FeatureImportanceOverweight": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "FeatureImportanceOverweight",
+      "RuleParameters": {
+        "rule_to_invoke": "FeatureImportanceOverweight"
+      }
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "feature_importance",
+        "CollectionParameters": {
+          "save_interval": "500"
+        }
+      }
+    ]
+  } 
  }
