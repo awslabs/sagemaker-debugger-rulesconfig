@@ -81,3 +81,6 @@ def stalled_training_rule():
     rule_config = _get_rule_config("StalledTrainingRule")
     return rule_config
 
+def feature_importance_overweight():
+    rule_config = _get_rule_config("FeatureImportanceOverweight")
+    return rule_config
