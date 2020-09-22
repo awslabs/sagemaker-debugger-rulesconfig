@@ -50,24 +50,6 @@ my_estimator = Estimator(
 )
 ```
 
-Example: Builtin rule with collection configuration specified
-
-```
-from smdebug_rulesconfig import get_collection
-
-my_estimator = Estimator(
-    ...
-    rules= [
-        Rule.sagemaker(
-            base_config=vanishing_gradient(),
-            collection_configurations=[
-                get_collection("weights")
-            ],
-        )
-    ]
-)
-```
-
 ## License
 
 This project is licensed under the Apache-2.0 License.
