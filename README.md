@@ -11,38 +11,38 @@ Amazon SageMaker Debugger Rulesconfig package can be used with Amazon SageMaker 
 Example: Vanilla builtin rule without customization
 
 ```
-from sagemaker.debugger import Rule
-from smdebug_rulesconfig import vanishing_gradient
+from sagemaker.debugger import Rule, rule_configs
 
 my_estimator = Estimator(
     ...
-    rules=[Rule.sagemaker(vanishing_gradient())]
+    rules=[Rule.sagemaker(rule_configs.vanishing_gradient())]
 )
 ```
 
 Example: Builtin rule with customization. For more details please refer to [Amazon SageMaker Python SDK](https://github.com/aws/sagemaker-python-sdk) documentation.
 
 ```
+from sagemaker.debugger import Rule, CollectionConfig, rule_configs
+
 my_estimator = Estimator(
     ...
     rules= [
-        Rule.sagemaker(vanishing_gradient()),
         Rule.sagemaker(
-            base_config=weight_update_ratio(),
-            name="my_wup_rule_name",
-            container_local_path="/local/path",
-            s3_output_path="s3://uri",
+            base_config=rule_configs.weight_update_ratio(),
+            name="my_wup_rule_name",            # Optional
+            container_local_path="/local/path", # Optional
+            s3_output_path="s3://uri",          # Optional
             rule_parameters={
                 "param1": "value1",
                 "param2": "value2"
-            },
+            }, # Optional
             collections_to_save=[
-                CollectionConfiguration(
+                CollectionConfig(
                     name="my_name",  # Required. If specified, debugger will collect tensors for this collection. Users may have to update rule_parameters above to run the rule on right tensors.
                     parameters= {
                         "param1": "value1",
                         "param2": "value2"
-                    }  # Required
+                    }  # Optional
                 )
             ],
         )
