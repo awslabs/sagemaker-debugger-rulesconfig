@@ -26,7 +26,8 @@
     "XGBOOST" : {
         "SIMPLE" : [
             "TreeDepth",
-            "ClassImbalance"
+            "ClassImbalance",
+            "PlotVisualizations"
         ],
         "ALL" : []
     }

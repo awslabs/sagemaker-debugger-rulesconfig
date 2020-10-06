@@ -227,5 +227,51 @@
         }
       }
     ]
-  } 
- }
+  },
+  "PlotVisualizations": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "PlotVisualizations",
+      "RuleParameters": {
+        "rule_to_invoke": "PlotVisualizations"
+      }
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "metrics",
+        "CollectionParameters": {
+          "save_interval": "100"
+        }
+      },
+      {
+        "CollectionName": "feature_importance",
+        "CollectionParameters": {
+          "save_interval": "100"
+        }
+      },
+      {
+        "CollectionName": "hyperparameters",
+        "CollectionParameters": {
+          "save_interval": "100"
+        }
+      },
+      {
+        "CollectionName": "predictions",
+        "CollectionParameters": {
+          "save_interval": "100"
+        }
+      },
+      {
+        "CollectionName": "labels",
+        "CollectionParameters": {
+          "save_interval": "100"
+        }
+      },
+      {
+        "CollectionName": "trees",
+        "CollectionParameters": {
+          "save_interval": "100"
+        }
+      }
+    ]
+  }
+}
