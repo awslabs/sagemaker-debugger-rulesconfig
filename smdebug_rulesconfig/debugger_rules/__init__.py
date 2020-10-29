@@ -1,4 +1,5 @@
-from smdebug_rulesconfig.debugger_rules.builtin_rules import (
+from ._collections import get_collection
+from .builtin_rules import (
     all_zero,
     check_input_images,
     class_imbalance,
@@ -19,16 +20,4 @@ from smdebug_rulesconfig.debugger_rules.builtin_rules import (
     unchanged_tensor,
     vanishing_gradient,
     weight_update_ratio,
-)
-from smdebug_rulesconfig.profiler_rules.rules import (
-    BatchSize,
-    CPUBottleneck,
-    GPUMemoryIncrease,
-    IOBottleneck,
-    LoadBalancing,
-    LowGPUUtilization,
-    MaxInitializationTime,
-    OverallSystemUsage,
-    ProfilerReport,
-    StepOutlier,
 )
