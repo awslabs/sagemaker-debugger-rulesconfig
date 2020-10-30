@@ -1,4 +1,4 @@
-from smdebug_rulesconfig.debugger_rules.builtin_rules import (
+from .debugger_rules.builtin_rules import (
     all_zero,
     check_input_images,
     class_imbalance,
@@ -20,7 +20,7 @@ from smdebug_rulesconfig.debugger_rules.builtin_rules import (
     vanishing_gradient,
     weight_update_ratio,
 )
-from smdebug_rulesconfig.profiler_rules.rules import (
+from .profiler_rules.rules import (
     BatchSize,
     CPUBottleneck,
     GPUMemoryIncrease,
