@@ -251,6 +251,16 @@ class ProfilerReport(ProfilerRuleBase):
 
         :param rule_parameters: Dictionary mapping rule + parameter name to value.
         """
+        invalid_key_format_error = (
+            "Key ({0}) does not follow naming scheme: <rule_name>_<parameter_name>"
+        )
+        invalid_rule_error = (
+            "{0} is an invalid rule name! Accepted rule names (case insensitive) are: {1}"
+        )
+        invalid_param_error = (
+            "{0} is an invalid parameter name! Accepted parameter names for {1} are: {2}"
+        )
+
         rule_classes = [
             BatchSize,
             CPUBottleneck,
@@ -264,13 +274,9 @@ class ProfilerReport(ProfilerRuleBase):
         ]
         rule_names = [rule.__name__ for rule in rule_classes]
         rule_classes_by_name = {rule.__name__.lower(): rule for rule in rule_classes}
-        invalid_rule_error = "{0} is invalid! Acceptable rule names (case insensitive) are: {1}"
-        invalid_param_error = "{0} is invalid! accepted params for {1} are: {2}"
 
         for key, val in rule_parameters.items():
-            assert (
-                key.count("_") >= 1
-            ), f"Key ({key}) must follow this naming scheme: <rule_name>_<parameter_name>"
+            assert key.count("_") >= 1, invalid_key_format_error.format(key)
             rule_name, *parameter_name = key.split("_")
             rule_name = rule_name.lower()
             parameter_name = "_".join(parameter_name).lower()
