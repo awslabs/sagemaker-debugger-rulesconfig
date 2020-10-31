@@ -1,14 +1,16 @@
+import inspect
+
 from smdebug_rulesconfig.profiler_rules.utils import validate_percentile, validate_positive_integer
 
 
-class ProfilerRule:
+class ProfilerRuleBase:
     def __init__(self, **rule_parameters):
         self.rule_name = self.__class__.__name__
         rule_parameters["rule_to_invoke"] = self.__class__.__name__
         self.rule_parameters = rule_parameters
 
 
-class BatchSize(ProfilerRule):
+class BatchSize(ProfilerRuleBase):
     def __init__(
         self,
         cpu_threshold_p95=70,
@@ -50,7 +52,7 @@ class BatchSize(ProfilerRule):
         )
 
 
-class CPUBottleneck(ProfilerRule):
+class CPUBottleneck(ProfilerRuleBase):
     def __init__(
         self,
         threshold=50,
@@ -82,7 +84,7 @@ class CPUBottleneck(ProfilerRule):
         )
 
 
-class GPUMemoryIncrease(ProfilerRule):
+class GPUMemoryIncrease(ProfilerRuleBase):
     def __init__(self, increase=5, patience=1000, window=10, scan_interval_us=60 * 1000 * 1000):
         """
         This rule helps to detect large increase in memory usage on GPUs. The rule computes the moving average of continous datapoints and compares it against the moving average of previous iteration.
@@ -101,7 +103,7 @@ class GPUMemoryIncrease(ProfilerRule):
         )
 
 
-class IOBottleneck(ProfilerRule):
+class IOBottleneck(ProfilerRuleBase):
     def __init__(
         self,
         threshold=50,
@@ -133,7 +135,7 @@ class IOBottleneck(ProfilerRule):
         )
 
 
-class LoadBalancing(ProfilerRule):
+class LoadBalancing(ProfilerRuleBase):
     def __init__(self, threshold=0.5, patience=1000, scan_interval_us=60 * 1000 * 1000):
         """
         This rule helps to detect issues in workload balancing between multiple GPUs.
@@ -150,7 +152,7 @@ class LoadBalancing(ProfilerRule):
         super().__init__(threshold=threshold, patience=patience, scan_interval_us=scan_interval_us)
 
 
-class LowGPUUtilization(ProfilerRule):
+class LowGPUUtilization(ProfilerRuleBase):
     def __init__(
         self,
         threshold_p95=70,
@@ -185,7 +187,7 @@ class LowGPUUtilization(ProfilerRule):
         )
 
 
-class MaxInitializationTime(ProfilerRule):
+class MaxInitializationTime(ProfilerRuleBase):
     def __init__(self, threshold=20, scan_interval_us=60 * 1000 * 1000):
         """
         This rule helps to detect if the training intialization is taking too much time. The rule waits until first
@@ -200,7 +202,7 @@ class MaxInitializationTime(ProfilerRule):
         super().__init__(threshold=threshold, scan_interval_us=scan_interval_us)
 
 
-class OverallSystemUsage(ProfilerRule):
+class OverallSystemUsage(ProfilerRuleBase):
     def __init__(self, scan_interval_us=60 * 1000 * 1000):
         """
         This rule measures overall system usage per worker node. The rule currently only aggregates values per node
@@ -214,7 +216,7 @@ class OverallSystemUsage(ProfilerRule):
         super().__init__(scan_interval_us=scan_interval_us)
 
 
-class StepOutlier(ProfilerRule):
+class StepOutlier(ProfilerRuleBase):
     def __init__(self, stddev=3, mode=None, n_outliers=10, scan_interval_us=60 * 1000 * 1000):
         """
         This rule helps to detect outlier in step durations. Rule returns True if duration is larger than stddev * standard deviation.
@@ -224,7 +226,7 @@ class StepOutlier(ProfilerRule):
         :param scan_interval_us: interval with which timeline files are scanned. Default is 60000000 us.
         """
         validate_positive_integer("stddev", stddev)
-        assert isinstance(mode, str), "Mode must be a string!"
+        assert mode is None or isinstance(mode, str), "Mode must be a string if specified!"
         validate_positive_integer("n_outliers", n_outliers)
         validate_positive_integer("scan_interval_us", scan_interval_us)
 
@@ -233,7 +235,7 @@ class StepOutlier(ProfilerRule):
         )
 
 
-class ProfilerReport(ProfilerRule):
+class ProfilerReport(ProfilerRuleBase):
     def __init__(self, **rule_parameters):
         """
         This rule will create a profiler report after invoking all of the rules. The parameters
@@ -260,19 +262,28 @@ class ProfilerReport(ProfilerRule):
             OverallSystemUsage,
             StepOutlier,
         ]
-        rule_classes_by_name = {rule.__name__: rule for rule in rule_classes}
+        rule_names = [rule.__name__ for rule in rule_classes]
+        rule_classes_by_name = {rule.__name__.lower(): rule for rule in rule_classes}
+        invalid_rule_error = "{0} is invalid! Acceptable rule names (case insensitive) are: {1}"
+        invalid_param_error = "{0} is invalid! accepted params for {1} are: {2}"
 
         for key, val in rule_parameters.items():
             assert (
                 key.count("_") >= 1
             ), f"Key ({key}) must follow this naming scheme: <rule_name>_<parameter_name>"
             rule_name, *parameter_name = key.split("_")
-            parameter_name = "_".join(parameter_name)
-            assert rule_name in rule_classes_by_name, f"{rule_name} is not a valid rule name!"
+            rule_name = rule_name.lower()
+            parameter_name = "_".join(parameter_name).lower()
+            assert rule_name in rule_classes_by_name, invalid_rule_error.format(
+                rule_name, rule_names
+            )
             rule_class = rule_classes_by_name[rule_name]
             try:
                 rule_class(**{parameter_name: val})
             except TypeError:
-                raise TypeError(f"{parameter_name} is not a valid parameter name for {rule_name}")
+                rule_signature = inspect.signature(rule_class.__init__)
+                raise TypeError(
+                    invalid_param_error.format(parameter_name, rule_class.__name__, rule_signature)
+                )
 
         super().__init__(**rule_parameters)
