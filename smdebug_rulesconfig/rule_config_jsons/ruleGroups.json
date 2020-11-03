@@ -27,7 +27,7 @@
         "SIMPLE" : [
             "TreeDepth",
             "ClassImbalance",
-            "PlotXGBoostVisualizations"
+            "PlotVisualizations"
         ],
         "ALL" : []
     }
