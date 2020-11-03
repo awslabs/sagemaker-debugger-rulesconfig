@@ -228,11 +228,11 @@
       }
     ]
   },
-  "PlotVisualizations": {
+  "PlotXGBoostVisualizations": {
     "DebugRuleConfiguration": {
-      "RuleConfigurationName": "PlotVisualizations",
+      "RuleConfigurationName": "PlotXGBoostVisualizations",
       "RuleParameters": {
-        "rule_to_invoke": "PlotVisualizations"
+        "rule_to_invoke": "PlotXGBoostVisualizations"
       }
     },
     "CollectionConfigurations": [

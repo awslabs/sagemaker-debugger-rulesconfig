@@ -84,3 +84,7 @@ def stalled_training_rule():
 def feature_importance_overweight():
     rule_config = _get_rule_config("FeatureImportanceOverweight")
     return rule_config
+
+def plot_xgboost_visualizations():
+    rule_config = _get_rule_config("PlotXGBoostVisualizations")
+    return rule_config
