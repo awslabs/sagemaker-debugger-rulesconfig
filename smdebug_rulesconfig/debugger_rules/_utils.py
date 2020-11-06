@@ -1,6 +1,8 @@
 import json
 import os
-from ._constants import RULE_CONFIG_FILE, RULE_GROUPS_CONFIG_FILE, COLLECTION_CONFIG_FILE
+
+from ._constants import COLLECTION_CONFIG_FILE, RULE_CONFIG_FILE, RULE_GROUPS_CONFIG_FILE
+
 
 def _get_rule_config(rule_name):
     rule_config = None
@@ -14,6 +16,7 @@ def _get_rule_config(rule_name):
                 rule_config = configs[rule_name]
     return rule_config
 
+
 def _get_rule_list(framework, type):
     rules_list = []
 
@@ -26,6 +29,7 @@ def _get_rule_list(framework, type):
                 if type in configs[framework]:
                     rules_list = configs[framework][type]
     return rules_list
+
 
 def _get_config_for_group(rules):
     rules_config = []
