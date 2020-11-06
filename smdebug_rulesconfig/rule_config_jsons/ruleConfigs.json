@@ -239,37 +239,31 @@
       {
         "CollectionName": "metrics",
         "CollectionParameters": {
-          "save_interval": "100"
+          "save_interval": "10"
         }
       },
       {
         "CollectionName": "feature_importance",
         "CollectionParameters": {
-          "save_interval": "100"
+          "save_interval": "10"
         }
       },
       {
         "CollectionName": "hyperparameters",
         "CollectionParameters": {
-          "save_interval": "100"
+          "save_interval": "10"
         }
       },
       {
         "CollectionName": "predictions",
         "CollectionParameters": {
-          "save_interval": "100"
+          "save_interval": "10"
         }
       },
       {
         "CollectionName": "labels",
         "CollectionParameters": {
-          "save_interval": "100"
-        }
-      },
-      {
-        "CollectionName": "trees",
-        "CollectionParameters": {
-          "save_interval": "100"
+          "save_interval": "10"
         }
       }
     ]
