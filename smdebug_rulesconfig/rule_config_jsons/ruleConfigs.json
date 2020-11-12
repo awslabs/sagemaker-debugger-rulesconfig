@@ -227,5 +227,45 @@
         }
       }
     ]
-  } 
- }
+  },
+  "CreateXgboostReport": {
+    "DebugRuleConfiguration": {
+      "RuleConfigurationName": "CreateXgboostReport",
+      "RuleParameters": {
+        "rule_to_invoke": "CreateXgboostReport"
+      }
+    },
+    "CollectionConfigurations": [
+      {
+        "CollectionName": "metrics",
+        "CollectionParameters": {
+          "save_interval": "10"
+        }
+      },
+      {
+        "CollectionName": "feature_importance",
+        "CollectionParameters": {
+          "save_interval": "10"
+        }
+      },
+      {
+        "CollectionName": "hyperparameters",
+        "CollectionParameters": {
+          "save_interval": "10"
+        }
+      },
+      {
+        "CollectionName": "predictions",
+        "CollectionParameters": {
+          "save_interval": "10"
+        }
+      },
+      {
+        "CollectionName": "labels",
+        "CollectionParameters": {
+          "save_interval": "10"
+        }
+      }
+    ]
+  }
+}

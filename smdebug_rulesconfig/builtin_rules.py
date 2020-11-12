@@ -84,3 +84,7 @@ def stalled_training_rule():
 def feature_importance_overweight():
     rule_config = _get_rule_config("FeatureImportanceOverweight")
     return rule_config
+
+def create_xgboost_report():
+    rule_config = _get_rule_config("CreateXgboostReport")
+    return rule_config
