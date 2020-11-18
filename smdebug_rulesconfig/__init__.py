@@ -19,5 +19,6 @@ from .builtin_rules import saturated_activation
 from .builtin_rules import nlp_sequence_ratio
 from .builtin_rules import stalled_training_rule
 from .builtin_rules import feature_importance_overweight
+from .builtin_rules import create_xgboost_report
 
 from ._collections import get_collection
