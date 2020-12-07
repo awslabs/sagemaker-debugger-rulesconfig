@@ -3,6 +3,7 @@ from .debugger_rules.builtin_rules import (
     check_input_images,
     class_imbalance,
     confusion,
+    create_xgboost_report,
     dead_relu,
     exploding_tensor,
     feature_importance_overweight,
@@ -20,6 +21,7 @@ from .debugger_rules.builtin_rules import (
     vanishing_gradient,
     weight_update_ratio,
 )
+from .debugger_rules._collections import get_collection
 from .profiler_rules.rules import (
     BatchSize,
     CPUBottleneck,
