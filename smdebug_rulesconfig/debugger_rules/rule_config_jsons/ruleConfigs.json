@@ -227,10 +227,6 @@
         }
       }
     ]
-<<<<<<< HEAD:smdebug_rulesconfig/debugger_rules/rule_config_jsons/ruleConfigs.json
-  }
- }
-=======
   },
   "CreateXgboostReport": {
     "DebugRuleConfiguration": {
@@ -273,4 +269,3 @@
     ]
   }
 }
->>>>>>> a71c2ef02e1c97381a0475cea8d9c18c15b5a83f:smdebug_rulesconfig/rule_config_jsons/ruleConfigs.json
