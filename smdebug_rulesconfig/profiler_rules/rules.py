@@ -258,7 +258,7 @@ class StepOutlier(ProfilerRuleBase):
 
 
 class ProfilerReport(ProfilerRuleBase):
-    def __init__(self, scan_interval_us=60 * 1000 * 1000, **rule_parameters):
+    def __init__(self, **rule_parameters):
         """
         This rule will create a profiler report after invoking all of the rules. The parameters
         used in any of these rules can be customized by following this naming scheme:
@@ -273,8 +273,6 @@ class ProfilerReport(ProfilerRuleBase):
 
         :param rule_parameters: Dictionary mapping rule + parameter name to value.
         """
-        validate_positive_integer("scan_interval_us", scan_interval_us)
-
         invalid_key_format_error = (
             "Key ({0}) does not follow naming scheme: <rule_name>_<parameter_name>"
         )
@@ -317,4 +315,4 @@ class ProfilerReport(ProfilerRuleBase):
                     invalid_param_error.format(parameter_name, rule_class.__name__, rule_signature)
                 )
 
-        super().__init__(scan_interval_us=scan_interval_us, **rule_parameters)
+        super().__init__(**rule_parameters)
