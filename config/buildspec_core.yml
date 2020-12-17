@@ -2,6 +2,10 @@
 # Build Spec for AWS CodeBuild CI which will run for every PR.
 
 version: 0.2
+env:
+  variables:
+    ## TODO: expand these environment variables once sagemaker tests are added for every framework and version.
+    run_pytest_core: "disable"
 phases:
   install:
     commands:
