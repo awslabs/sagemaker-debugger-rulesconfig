@@ -1,4 +1,4 @@
-from .actions.actions import SMS, ActionList, Email, StopTraining, validate_actions
+from .actions.actions import SMS, ActionList, Email, StopTraining, is_valid_action_object
 from .debugger_rules._collections import get_collection
 from .debugger_rules.builtin_rules import (
     all_zero,

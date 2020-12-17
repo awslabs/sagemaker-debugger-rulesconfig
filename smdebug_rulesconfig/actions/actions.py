@@ -5,12 +5,15 @@ class Action(object):
     def __init__(self, **action_parameters):
         """
         Base class for action, which is to be invoked when a rule fires.. Offers `serialize` function to convert action
-        parameters to a string dictionary. This class is not meant to be initialized directly.
+        parameters to a string dictionary. This class is not meant to be initialized directly. Accepts dictionary of
+        action parameters and drops keys whose values are `None`.
 
         :param action_parameters: Dictionary of action parameters.
         """
         action_parameters["name"] = self.__class__.__name__.lower()
-        self.action_parameters = action_parameters
+        self.action_parameters = {
+            key: value for key, value in action_parameters.items() if value is not None
+        }
 
     def serialize(self):
         """
@@ -39,7 +42,7 @@ class ActionList(object):
             isinstance(action, Action) for action in actions
         ), "actions must be list of Action objects!"
 
-        self.action_parameters = actions
+        self.actions = actions
 
     def update_training_job_prefix_if_not_specified(self, training_job_name):
         """
@@ -51,12 +54,12 @@ class ActionList(object):
         """
         assert isinstance(training_job_name, str), "training_job_name must be a string!"
 
-        for action in self.action_parameters:
+        for action in self.actions:
             if isinstance(action, StopTraining):
                 action.update_training_job_prefix_if_not_specified(training_job_name)
 
     def serialize(self):
-        return "[" + ", ".join([action.serialize() for action in self.action_parameters]) + "]"
+        return "[" + ", ".join([action.serialize() for action in self.actions]) + "]"
 
 
 class StopTraining(Action):
@@ -82,9 +85,10 @@ class StopTraining(Action):
         :param training_job_prefix: The prefix of the training job to stop if the rule is fired. This must only refer
             to one active training job, otherwise no training job will be stopped.
         """
-        assert training_job_prefix is None or validate_string(
-            "training_job_prefix", training_job_prefix
-        ), "training_job_name must be a string!"
+        if training_job_prefix is not None:
+            validate_string(
+                "training_job_prefix", training_job_prefix
+            ), "training_job_prefix must be a string!"
         self.use_default_training_job_prefix = True if training_job_prefix is None else False
         super().__init__(training_job_prefix=training_job_prefix)
 
@@ -162,9 +166,10 @@ class SMS(Action):
         super().__init__(endpoint=phone_number)
 
 
-def validate_actions(actions):
+def is_valid_action_object(actions):
     """
-    Helper function to be used by the sagemaker SDK to determine whether the provided actions object is valid or not.
+    Helper function to be used by the sagemaker SDK to determine whether the provided object is a valid action object
+    or not (must be of type `Action` or `ActionList`.
 
     :param actions: actions object specified by the user when calling `Rule.sagemaker` in the sagemaker SDK.
     :return: Boolean for whether the provided actions object is valid or not.
