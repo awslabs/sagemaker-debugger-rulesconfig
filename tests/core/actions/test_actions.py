@@ -2,7 +2,7 @@ from smdebug_rulesconfig import ActionList, StopTraining, Email, SMS, is_valid_a
 import pytest
 
 
-from tests.unit.actions.utils import validate_action_str
+from tests.core.actions.utils import validate_action_str
 
 
 @pytest.fixture
