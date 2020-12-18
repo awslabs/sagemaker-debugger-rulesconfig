@@ -13,24 +13,26 @@ def _match_regex(regex, string):
 
 
 def validate_training_job_prefix(key, value):
-    assert isinstance(value, str), f"{key} must be a string!"
-    assert _match_regex(
-        TRAINING_JOB_PREFIX_REGEX, value
-    ), "Invalid training job prefix! Must contain only letters, numbers and hyphens!"
+    if not isinstance(value, str):
+        raise ValueError(f"{key} must be a string!")
+    if not _match_regex(TRAINING_JOB_PREFIX_REGEX, value):
+        raise ValueError(
+            "Invalid training job prefix! Must contain only letters, numbers and hyphens!"
+        )
 
 
 def validate_email_address(key, value):
-    assert isinstance(value, str), f"{key} must be a string!"
-    assert _match_regex(
-        EMAIL_ADDRESS_REGEX, value
-    ), "Invalid email address provided! Must follow this scheme: username@domain"
+    if not isinstance(value, str):
+        raise ValueError(f"{key} must be a string!")
+    if not _match_regex(EMAIL_ADDRESS_REGEX, value):
+        raise ValueError("Invalid email address provided! Must follow this scheme: username@domain")
 
 
 def validate_phone_number(key, value):
-    assert isinstance(value, str), f"{key} must be a string!"
-    assert _match_regex(
-        PHONE_NUMBER_REGEX, value
-    ), "Invalid phone number provided! Must be valid 10 digit number!"
+    if not isinstance(value, str):
+        raise ValueError(f"{key} must be a string!")
+    if not _match_regex(PHONE_NUMBER_REGEX, value):
+        raise ValueError("Invalid phone number provided! Must be valid 10 digit number!")
 
 
 def validate_action_str(action_str, action_parameters):

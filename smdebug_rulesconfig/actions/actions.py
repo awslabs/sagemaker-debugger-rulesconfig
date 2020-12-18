@@ -1,3 +1,5 @@
+from typing import Optional, Union
+
 from smdebug_rulesconfig.actions.utils import (
     validate_training_job_prefix,
     validate_email_address,
@@ -7,7 +9,7 @@ from smdebug_rulesconfig.actions.utils import (
 
 
 class Action(object):
-    def __init__(self, **action_parameters):
+    def __init__(self, **action_parameters: str):
         """
         Base class for action, which is to be invoked when a rule fires.. Offers `serialize` function to convert action
         parameters to a string dictionary. This class is not meant to be initialized directly. Accepts dictionary of
@@ -39,20 +41,19 @@ class Action(object):
 
 
 class ActionList(object):
-    def __init__(self, *actions):
+    def __init__(self, *actions: Action):
         """
         Higher level object to maintain a list of actions to be invoked when a rule is fired. Offers higher level
         `serialize` function to handle serialization of actions as a string list of dictionaries.
 
         :param actions: List of actions.
         """
-        assert all(
-            isinstance(action, Action) for action in actions
-        ), "actions must be list of Action objects!"
+        if not all(isinstance(action, Action) for action in actions):
+            raise TypeError("actions must be list of Action objects!")
 
         self.actions = actions
 
-    def update_training_job_prefix_if_not_specified(self, training_job_name):
+    def update_training_job_prefix_if_not_specified(self, training_job_name: str):
         """
         For any StopTraining actions in the action list, update the training job prefix to be the training job name if
         the user has not already specified a custom training job prefix. This is meant to be called via the sagemaker
@@ -71,7 +72,7 @@ class ActionList(object):
 
 
 class StopTraining(Action):
-    def __init__(self, training_job_prefix=None):
+    def __init__(self, training_job_prefix: Optional[str] = None):
         """
         Action for stopping the training job when a rule is fired. Note that a policy must be created in the AWS
         account to allow the sagemaker role to stop the training job:
@@ -97,9 +98,9 @@ class StopTraining(Action):
         if training_job_prefix is not None:
             validate_training_job_prefix("training_job_prefix", training_job_prefix)
             self.use_default_training_job_prefix = False
-        super().__init__(training_job_prefix=training_job_prefix)
+        super(StopTraining, self).__init__(training_job_prefix=training_job_prefix)
 
-    def update_training_job_prefix_if_not_specified(self, training_job_name):
+    def update_training_job_prefix_if_not_specified(self, training_job_name: str):
         """
         Update the training job prefix to be the training job name if the user has not already specified a custom
         training job prefix. This is meant to be called via the sagemaker SDK when `estimator.fit` is called by the
@@ -114,7 +115,7 @@ class StopTraining(Action):
 
 
 class Email(Action):
-    def __init__(self, email_address):
+    def __init__(self, email_address: str):
         """
         Action for sending an email to the provided email address when the rule is fired. Note that a policy must be
         created in the AWS account to allow the sagemaker role to send an email to the user:
@@ -140,11 +141,11 @@ class Email(Action):
         :param email_address: Email address to send the email notification to.
         """
         validate_email_address("email_address", email_address)
-        super().__init__(endpoint=email_address)
+        super(Email, self).__init__(endpoint=email_address)
 
 
 class SMS(Action):
-    def __init__(self, phone_number):
+    def __init__(self, phone_number: str):
         """
         Action for sending an SMS to the provided phone number when the rule is fired. Note that a policy must be
         created in the AWS account to allow the sagemaker role to send an SMS to the user:
@@ -170,10 +171,10 @@ class SMS(Action):
         :param phone_number: Phone number to send the SMS to.
         """
         validate_phone_number("phone_number", phone_number)
-        super().__init__(endpoint=phone_number)
+        super(SMS, self).__init__(endpoint=phone_number)
 
 
-def is_valid_action_object(actions):
+def is_valid_action_object(actions: Union[Action, ActionList]):
     """
     Helper function to be used by the sagemaker SDK to determine whether the provided object is a valid action object
     or not (must be of type `Action` or `ActionList`.
