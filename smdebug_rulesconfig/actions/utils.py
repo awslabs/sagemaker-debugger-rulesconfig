@@ -2,20 +2,15 @@ import re
 import json
 
 
-TRAINING_JOB_PREFIX_REGEX = "[A-Za-z0-9\-]+"
+TRAINING_JOB_PREFIX_REGEX = "^[A-Za-z0-9\-]+$"
 EMAIL_ADDRESS_REGEX = "^[a-z0-9]+[@]\w+[.]\w{2,3}$"
-PHONE_NUMBER_REGEX = "\+\d{10,15}"
-
-
-def _match_regex(regex, string):
-    match = re.search(regex, string)
-    return match is not None and match.start() == 0 and match.end() == len(string)
+PHONE_NUMBER_REGEX = "^\+\d{1,15}$"
 
 
 def validate_training_job_prefix(key, value):
     if not isinstance(value, str):
         raise ValueError(f"{key} must be a string!")
-    if not _match_regex(TRAINING_JOB_PREFIX_REGEX, value):
+    if not re.search(TRAINING_JOB_PREFIX_REGEX, value):
         raise ValueError(
             "Invalid training job prefix! Must contain only letters, numbers and hyphens!"
         )
@@ -24,16 +19,17 @@ def validate_training_job_prefix(key, value):
 def validate_email_address(key, value):
     if not isinstance(value, str):
         raise ValueError(f"{key} must be a string!")
-    if not _match_regex(EMAIL_ADDRESS_REGEX, value):
+    if not re.search(EMAIL_ADDRESS_REGEX, value):
         raise ValueError("Invalid email address provided! Must follow this scheme: username@domain")
 
 
 def validate_phone_number(key, value):
     if not isinstance(value, str):
         raise ValueError(f"{key} must be a string!")
-    if not _match_regex(PHONE_NUMBER_REGEX, value):
+    if not re.search(PHONE_NUMBER_REGEX, value):
         raise ValueError(
-            "Invalid phone number provided! Must be 10-15 digit number starting with a `+`!"
+            """Invalid phone number provided! Must follow the E.164 format.
+            See https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html for more info."""
         )
 
 
