@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 # TODO: Add end to end sagemaker tests for each framework and version so that they can be run here.
 
-set -e
-set -ex
-set -o pipefail
+set -eox pipefail
 
 
 run_for_framework() {
