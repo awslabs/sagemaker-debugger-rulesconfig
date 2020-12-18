@@ -4,7 +4,7 @@ import json
 
 TRAINING_JOB_PREFIX_REGEX = "[A-Za-z0-9\-]+"
 EMAIL_ADDRESS_REGEX = "^[a-z0-9]+[@]\w+[.]\w{2,3}$"
-PHONE_NUMBER_REGEX = "\+\d{10}"
+PHONE_NUMBER_REGEX = "\+\d{10,15}"
 
 
 def _match_regex(regex, string):
@@ -33,7 +33,7 @@ def validate_phone_number(key, value):
         raise ValueError(f"{key} must be a string!")
     if not _match_regex(PHONE_NUMBER_REGEX, value):
         raise ValueError(
-            "Invalid phone number provided! Must be 10 digit number starting with a `+`!"
+            "Invalid phone number provided! Must be 10-15 digit number starting with a `+`!"
         )
 
 

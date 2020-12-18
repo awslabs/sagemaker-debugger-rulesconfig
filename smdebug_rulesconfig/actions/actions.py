@@ -168,7 +168,7 @@ class SMS(Action):
         }
         ```
 
-        :param phone_number: 10 digit phone number preceded by a `+`.
+        :param phone_number: 10-15 digit phone number preceded by a `+`.
         """
         validate_phone_number("phone_number", phone_number)
         super(SMS, self).__init__(endpoint=phone_number)
