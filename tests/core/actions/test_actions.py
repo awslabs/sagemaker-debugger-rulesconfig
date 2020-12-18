@@ -1,8 +1,6 @@
 from smdebug_rulesconfig import ActionList, StopTraining, Email, SMS, is_valid_action_object
+
 import pytest
-
-
-from tests.core.actions.utils import validate_action_str
 
 
 @pytest.fixture
@@ -51,7 +49,6 @@ def test_default_stop_training_action(stop_training_name, training_job_name):
     """
     action = StopTraining()
     assert is_valid_action_object(action)
-    validate_action_str(action.serialize(), action.action_parameters)
     assert action.use_default_training_job_prefix is True
     assert action.action_parameters == {"name": stop_training_name}
 
@@ -73,7 +70,6 @@ def test_custom_stop_training_action(stop_training_name, training_job_prefix, tr
     """
     action = StopTraining(training_job_prefix)
     assert is_valid_action_object(action)
-    validate_action_str(action.serialize(), action.action_parameters)
     assert action.use_default_training_job_prefix is False
     assert action.action_parameters == {
         "name": stop_training_name,
@@ -94,7 +90,6 @@ def test_email_action(email_name, email_address):
     """
     action = Email(email_address)
     assert is_valid_action_object(action)
-    validate_action_str(action.serialize(), action.action_parameters)
     assert action.action_parameters == {"name": email_name, "endpoint": email_address}
 
 
@@ -105,7 +100,6 @@ def test_sms_action(sms_name, phone_number):
     """
     action = SMS(phone_number)
     assert is_valid_action_object(action)
-    validate_action_str(action.serialize(), action.action_parameters)
     assert action.action_parameters == {"name": sms_name, "endpoint": phone_number}
 
 
@@ -125,7 +119,6 @@ def test_action_list(
     actions = ActionList(StopTraining(), Email(email_address), SMS(phone_number))
     assert is_valid_action_object(actions)
     action_parameters = [action.action_parameters for action in actions.actions]
-    validate_action_str(actions.serialize(), action_parameters)
     assert action_parameters == [
         {"name": stop_training_name},
         {"name": email_name, "endpoint": email_address},
@@ -148,13 +141,13 @@ def test_action_validation():
     This is important, as the sagemaker SDK uses this function to validate actions input.
     """
     with pytest.raises(AssertionError):
-        StopTraining(10)
+        StopTraining("bad_training_job_prefix")
 
     with pytest.raises(AssertionError):
-        Email(None)
+        Email("bad.email.com")
 
     with pytest.raises(AssertionError):
-        SMS(None)
+        SMS("1234")
 
     with pytest.raises(AssertionError):
         ActionList(StopTraining(), "bad_action")

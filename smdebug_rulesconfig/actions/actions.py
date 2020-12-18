@@ -1,4 +1,9 @@
-from smdebug_rulesconfig.actions.utils import validate_string
+from smdebug_rulesconfig.actions.utils import (
+    validate_training_job_prefix,
+    validate_email_address,
+    validate_phone_number,
+    validate_action_str,
+)
 
 
 class Action(object):
@@ -14,6 +19,9 @@ class Action(object):
         self.action_parameters = {
             key: value for key, value in action_parameters.items() if value is not None
         }
+        validate_action_str(
+            self.serialize(), self.action_parameters
+        )  # sanity check, not expected to error!
 
     def serialize(self):
         """
@@ -52,7 +60,7 @@ class ActionList(object):
 
         :param training_job_name: Name of the training job, passed in when `estimator.fit` is called.
         """
-        assert isinstance(training_job_name, str), "training_job_name must be a string!"
+        validate_training_job_prefix("training_job_name", training_job_name)
 
         for action in self.actions:
             if isinstance(action, StopTraining):
@@ -85,11 +93,10 @@ class StopTraining(Action):
         :param training_job_prefix: The prefix of the training job to stop if the rule is fired. This must only refer
             to one active training job, otherwise no training job will be stopped.
         """
+        self.use_default_training_job_prefix = True
         if training_job_prefix is not None:
-            validate_string(
-                "training_job_prefix", training_job_prefix
-            ), "training_job_prefix must be a string!"
-        self.use_default_training_job_prefix = True if training_job_prefix is None else False
+            validate_training_job_prefix("training_job_prefix", training_job_prefix)
+            self.use_default_training_job_prefix = False
         super().__init__(training_job_prefix=training_job_prefix)
 
     def update_training_job_prefix_if_not_specified(self, training_job_name):
@@ -100,7 +107,7 @@ class StopTraining(Action):
 
         :param training_job_name: Name of the training job, passed in when `estimator.fit` is called.
         """
-        validate_string("training_job_name", training_job_name)
+        validate_training_job_prefix("training_job_name", training_job_name)
 
         if self.use_default_training_job_prefix:
             self.action_parameters["training_job_prefix"] = training_job_name
@@ -132,7 +139,7 @@ class Email(Action):
 
         :param email_address: Email address to send the email notification to.
         """
-        validate_string("email_address", email_address)
+        validate_email_address("email_address", email_address)
         super().__init__(endpoint=email_address)
 
 
@@ -162,7 +169,7 @@ class SMS(Action):
 
         :param phone_number: Phone number to send the SMS to.
         """
-        validate_string("phone_number", phone_number)
+        validate_phone_number("phone_number", phone_number)
         super().__init__(endpoint=phone_number)
 
 
