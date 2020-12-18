@@ -10,7 +10,7 @@ PHONE_NUMBER_REGEX = "^\+\d{1,15}$"
 def validate_training_job_prefix(key, value):
     if not isinstance(value, str):
         raise ValueError(f"{key} must be a string!")
-    if not re.search(TRAINING_JOB_PREFIX_REGEX, value):
+    if not re.match(TRAINING_JOB_PREFIX_REGEX, value):
         raise ValueError(
             "Invalid training job prefix! Must contain only letters, numbers and hyphens!"
         )
@@ -19,14 +19,14 @@ def validate_training_job_prefix(key, value):
 def validate_email_address(key, value):
     if not isinstance(value, str):
         raise ValueError(f"{key} must be a string!")
-    if not re.search(EMAIL_ADDRESS_REGEX, value):
+    if not re.match(EMAIL_ADDRESS_REGEX, value):
         raise ValueError("Invalid email address provided! Must follow this scheme: username@domain")
 
 
 def validate_phone_number(key, value):
     if not isinstance(value, str):
         raise ValueError(f"{key} must be a string!")
-    if not re.search(PHONE_NUMBER_REGEX, value):
+    if not re.match(PHONE_NUMBER_REGEX, value):
         raise ValueError(
             """Invalid phone number provided! Must follow the E.164 format.
             See https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html for more info."""
