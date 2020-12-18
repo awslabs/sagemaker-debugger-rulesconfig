@@ -57,12 +57,11 @@ class ActionList(object):
         """
         For any StopTraining actions in the action list, update the training job prefix to be the training job name if
         the user has not already specified a custom training job prefix. This is meant to be called via the sagemaker
-        SDK when `estimator.fit` is called by the user.
+        SDK when `estimator.fit` is called by the user. Validation is purposely excluded here so that any failures in
+        validation of the training job name are intentionally caught in the sagemaker SDK and not here.
 
         :param training_job_name: Name of the training job, passed in when `estimator.fit` is called.
         """
-        validate_training_job_prefix("training_job_name", training_job_name)
-
         for action in self.actions:
             if isinstance(action, StopTraining):
                 action.update_training_job_prefix_if_not_specified(training_job_name)
@@ -103,13 +102,12 @@ class StopTraining(Action):
     def update_training_job_prefix_if_not_specified(self, training_job_name: str):
         """
         Update the training job prefix to be the training job name if the user has not already specified a custom
-        training job prefix. This is meant to be called via the sagemaker SDK when `estimator.fit` is called by the
-        user.
+        training job prefix. This is only meant to be called via the sagemaker SDK when `estimator.fit` is called by the
+        user. Validation is purposely excluded here so that any failures in validation of the training job name are
+        intentionally caught in the sagemaker SDK and not here.
 
         :param training_job_name: Name of the training job, passed in when `estimator.fit` is called.
         """
-        validate_training_job_prefix("training_job_name", training_job_name)
-
         if self.use_default_training_job_prefix:
             self.action_parameters["training_job_prefix"] = training_job_name
 
