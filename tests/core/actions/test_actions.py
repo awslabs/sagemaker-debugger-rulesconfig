@@ -140,16 +140,16 @@ def test_action_validation():
     Also verify that the `is_valid_action_object` returns `False` for any input that isn't an `Action` or `ActionList`.
     This is important, as the sagemaker SDK uses this function to validate actions input.
     """
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         StopTraining("bad_training_job_prefix")
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         Email("bad.email.com")
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         SMS("1234")
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(TypeError):
         ActionList(StopTraining(), "bad_action")
 
     assert not is_valid_action_object("bad_action")

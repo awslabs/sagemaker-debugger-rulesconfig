@@ -4,12 +4,12 @@ import json
 
 TRAINING_JOB_PREFIX_REGEX = "[A-Za-z0-9\-]+"
 EMAIL_ADDRESS_REGEX = "^[a-z0-9]+[@]\w+[.]\w{2,3}$"
-PHONE_NUMBER_REGEX = "\d{10}"
+PHONE_NUMBER_REGEX = "\+\d{10}"
 
 
 def _match_regex(regex, string):
     match = re.search(regex, string)
-    return match is not None and match.end() == len(string)
+    return match is not None and match.start() == 0 and match.end() == len(string)
 
 
 def validate_training_job_prefix(key, value):
@@ -32,7 +32,9 @@ def validate_phone_number(key, value):
     if not isinstance(value, str):
         raise ValueError(f"{key} must be a string!")
     if not _match_regex(PHONE_NUMBER_REGEX, value):
-        raise ValueError("Invalid phone number provided! Must be valid 10 digit number!")
+        raise ValueError(
+            "Invalid phone number provided! Must be 10 digit number starting with a `+`!"
+        )
 
 
 def validate_action_str(action_str, action_parameters):
