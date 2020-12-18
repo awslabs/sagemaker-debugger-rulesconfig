@@ -35,3 +35,6 @@ from .profiler_rules.rules import (
     ProfilerReport,
     StepOutlier,
 )
+
+# Local
+from ._version import __version__
