@@ -4,7 +4,12 @@ from ._utils import _get_config_for_group
 
 
 class MXNET(Enum):
-    SIMPLE = ["VanishingGradient", "LossNotDecreasing", "WeightUpdateRatio"]
+    SIMPLE = [
+        "AllZero",
+        "VanishingGradient",
+        "LossNotDecreasing",
+        "WeightUpdateRatio"
+    ]
     ALL = []
 
 
