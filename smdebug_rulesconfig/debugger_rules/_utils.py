@@ -1,7 +1,7 @@
 import json
 import os
 
-from ._constants import COLLECTION_CONFIG_FILE, RULE_CONFIG_FILE, RULE_GROUPS_CONFIG_FILE
+from ._constants import COLLECTION_CONFIG_FILE, RULE_CONFIG_FILE, RULE_GROUPS_CONFIG_FILE, SUPPORTED_FRAMEWORKS, SUPPORTED_RULE_GROUPS
 
 
 def _get_rule_config(rule_name):
@@ -17,8 +17,12 @@ def _get_rule_config(rule_name):
     return rule_config
 
 
-def _get_rule_list(framework, type):
+def _get_rule_list(framework, group):
     rules_list = []
+    framework = framework.upper()
+    group = group.upper()
+    assert framework in SUPPORTED_FRAMEWORKS
+    assert group in SUPPORTED_RULE_GROUPS
 
     config_file_path = os.path.dirname(os.path.abspath(__file__)) + "/" + RULE_GROUPS_CONFIG_FILE
 
@@ -26,8 +30,8 @@ def _get_rule_list(framework, type):
         with open(config_file_path) as json_data:
             configs = json.load(json_data)
             if framework in configs:
-                if type in configs[framework]:
-                    rules_list = configs[framework][type]
+                if group in configs[framework]:
+                    rules_list = configs[framework][group]
     return rules_list
 
 
