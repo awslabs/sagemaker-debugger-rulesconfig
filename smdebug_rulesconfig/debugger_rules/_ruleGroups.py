@@ -1,34 +1,30 @@
-from enum import Enum
+# set of rules that are expected to work for all supported frameworks
+# Supported Frameworks: Mxnet, Pytorch, Tensorflow, Xgboost
+UNIVERSAL_RULES = {
+    "AllZero",
+    "ClassImbalance",
+    "LossNotDecreasing",
+    "Overfit",
+    "Overtraining",
+    "SimilarAcrossRuns",
+    "StalledTrainingRule",
+    "TensorVariance",
+    "UnchangedTensor",
+}
 
-from ._utils import _get_config_for_group
+# set of rules that are expected to work for only for supported deep learning frameworks
+# Supported Deep Learning Frameworks: Mxnet, Pytorch, Tensorflow
+DEEP_LEARNING_RULES = {
+    "DeadRelu",
+    "ExplodingTensor",
+    "PoorWeightInitialization",
+    "SaturatedActivation",
+    "VanishingGradient",
+    "WeightUpdateRatio",
+}
 
+# Rules intended to be used as part of a DL Application
+DEEP_LEARNING_APPLICATION_RULES = {"CheckInputImages", "NLPSequenceRatio"}
 
-class MXNET(Enum):
-    SIMPLE = [
-        "AllZero",
-        "VanishingGradient",
-        "LossNotDecreasing",
-        "WeightUpdateRatio"
-    ]
-    ALL = []
-
-
-class TENSORFLOW(Enum):
-    SIMPLE = ["VanishingGradient", "LossNotDecreasing", "WeightUpdateRatio"]
-    ALL = []
-
-
-class PYTORCH(Enum):
-    SIMPLE = ["VanishingGradient", "LossNotDecreasing", "WeightUpdateRatio"]
-    ALL = []
-
-
-class XGBOOST(Enum):
-    SIMPLE = ["TreeDepth", "ClassImbalance"]
-    ALL = []
-
-
-def get_rule_groups(ruleEnum):
-    ruleEnumVal = ruleEnum.value
-    rules_config = _get_config_for_group(ruleEnumVal)
-    return rules_config
+# Rules only compatible with XGBOOST
+XGBOOST_RULES = {"Confusion", "FeatureImportanceOverweight", "TreeDepth"}
