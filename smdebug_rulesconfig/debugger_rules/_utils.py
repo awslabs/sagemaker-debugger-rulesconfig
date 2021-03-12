@@ -30,14 +30,13 @@ def _get_rule_config(rule_name):
 
 def _get_rule_list(framework):
     framework = framework.upper()
-    assert framework in SUPPORTED_FRAMEWORKS
-
     rule_set = UNIVERSAL_RULES
-
     if framework in SUPPORTED_DL_FRAMEWORKS:
         rule_set = rule_set.union(DEEP_LEARNING_RULES).union(DEEP_LEARNING_APPLICATION_RULES)
     elif framework == "XGBOOST":
         rule_set = rule_set.union(XGBOOST_RULES)
+    else:
+        raise Exception(f"{framework} is not supported by debugger rules")
 
     return list(rule_set)
 
