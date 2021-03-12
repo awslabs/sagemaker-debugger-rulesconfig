@@ -3,12 +3,12 @@
 UNIVERSAL_RULES = {
     "AllZero",
     "ClassImbalance",
+    "Confusion",
     "LossNotDecreasing",
     "Overfit",
     "Overtraining",
     "SimilarAcrossRuns",
     "StalledTrainingRule",
-    "TensorVariance",
     "UnchangedTensor",
 }
 
@@ -19,6 +19,7 @@ DEEP_LEARNING_RULES = {
     "ExplodingTensor",
     "PoorWeightInitialization",
     "SaturatedActivation",
+    "TensorVariance",
     "VanishingGradient",
     "WeightUpdateRatio",
 }
@@ -27,4 +28,4 @@ DEEP_LEARNING_RULES = {
 DEEP_LEARNING_APPLICATION_RULES = {"CheckInputImages", "NLPSequenceRatio"}
 
 # Rules only compatible with XGBOOST
-XGBOOST_RULES = {"Confusion", "FeatureImportanceOverweight", "TreeDepth"}
+XGBOOST_RULES = {"FeatureImportanceOverweight", "TreeDepth"}
