@@ -26,3 +26,20 @@ def test_framework_rule_compatibility(rule_list, framework_list):
     for rule in rule_list:
         for framework in framework_list:
             assert rule in _get_rule_list(framework), f"Rule: {rule} not supported by {framework}"
+
+
+@pytest.mark.parametrize(
+    "rule_list, framework_list",
+    [
+        (DEEP_LEARNING_RULES, SUPPORTED_DL_FRAMEWORKS + ["xgboost"]),
+        (XGBOOST_RULES, ["xgboost"] + SUPPORTED_DL_FRAMEWORKS),
+    ],
+)
+def test_framework_rule_incompatibility(rule_list, framework_list):
+    for rule in rule_list:
+        for framework in framework_list:
+            if rule not in _get_rule_list(framework):
+                if rule in DEEP_LEARNING_RULES:
+                    assert framework == "xgboost"
+                elif rule in XGBOOST_RULES:
+                    assert framework in SUPPORTED_DL_FRAMEWORKS
