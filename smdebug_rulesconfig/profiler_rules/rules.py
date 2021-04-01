@@ -1,6 +1,12 @@
 import inspect
 
-from smdebug_rulesconfig.profiler_rules.utils import validate_percentile, validate_positive_integer
+from smdebug_rulesconfig.profiler_rules.utils import (
+    invalid_key_format_error,
+    invalid_rule_error,
+    invalid_param_error,
+    validate_percentile,
+    validate_positive_integer,
+)
 
 
 class ProfilerRuleBase:
@@ -35,12 +41,14 @@ class BatchSize(ProfilerRuleBase):
         :param window: window size for computing quantiles.
         :param scan_interval_us: interval with which timeline files are scanned. Default is 60000000 us.
         """
-        validate_percentile("cpu_threshold_p95", cpu_threshold_p95)
-        validate_percentile("gpu_threshold_p95", gpu_threshold_p95)
-        validate_percentile("gpu_memory_threshold_p95", gpu_memory_threshold_p95)
-        validate_positive_integer("patience", patience)
-        validate_positive_integer("window", window)
-        validate_positive_integer("scan_interval_us", scan_interval_us)
+        validate_percentile(self.__class__.__name__, "cpu_threshold_p95", cpu_threshold_p95)
+        validate_percentile(self.__class__.__name__, "gpu_threshold_p95", gpu_threshold_p95)
+        validate_percentile(
+            self.__class__.__name__, "gpu_memory_threshold_p95", gpu_memory_threshold_p95
+        )
+        validate_positive_integer(self.__class__.__name__, "patience", patience)
+        validate_positive_integer(self.__class__.__name__, "window", window)
+        validate_positive_integer(self.__class__.__name__, "scan_interval_us", scan_interval_us)
 
         super().__init__(
             cpu_threshold_p95=cpu_threshold_p95,
@@ -69,11 +77,11 @@ class CPUBottleneck(ProfilerRuleBase):
         :param patience: How many values to record before checking for CPU bottlenecks. During training initilization, GPU is likely at 0 percent, so Rule should not check for underutilization immediatly. Default 1000.
         :param scan_interval_us: interval with which timeline files are scanned. Default is 60000000 us.
         """
-        validate_percentile("threshold", threshold)
-        validate_percentile("gpu_threshold", gpu_threshold)
-        validate_percentile("cpu_threshold", cpu_threshold)
-        validate_positive_integer("patience", patience)
-        validate_positive_integer("scan_interval_us", scan_interval_us)
+        validate_percentile(self.__class__.__name__, "threshold", threshold)
+        validate_percentile(self.__class__.__name__, "gpu_threshold", gpu_threshold)
+        validate_percentile(self.__class__.__name__, "cpu_threshold", cpu_threshold)
+        validate_positive_integer(self.__class__.__name__, "patience", patience)
+        validate_positive_integer(self.__class__.__name__, "scan_interval_us", scan_interval_us)
 
         super().__init__(
             threshold=threshold,
@@ -92,9 +100,9 @@ class Dataloader(ProfilerRuleBase):
         :param max_threshold: how many cores should be at maximum used by dataloading processes. Default 200%
         :param scan_interval_us: interval with which timeline files are scanned. Default is 60000000 us.
         """
-        validate_positive_integer("min_threshold", min_threshold)
-        validate_positive_integer("max_threshold", max_threshold)
-        validate_positive_integer("scan_interval_us", scan_interval_us)
+        validate_positive_integer(self.__class__.__name__, "min_threshold", min_threshold)
+        validate_positive_integer(self.__class__.__name__, "max_threshold", max_threshold)
+        validate_positive_integer(self.__class__.__name__, "scan_interval_us", scan_interval_us)
 
         super().__init__(
             min_threshold=min_threshold,
@@ -115,10 +123,10 @@ class GPUMemoryIncrease(ProfilerRuleBase):
         :param window: window size for computing moving average of continous datapoints
         :param scan_interval_us: interval with which timeline files are scanned. Default is 60000000 us.
         """
-        validate_positive_integer("increase", increase)
-        validate_positive_integer("patience", patience)
-        validate_positive_integer("window", window)
-        validate_positive_integer("scan_interval_us", scan_interval_us)
+        validate_positive_integer(self.__class__.__name__, "increase", increase)
+        validate_positive_integer(self.__class__.__name__, "patience", patience)
+        validate_positive_integer(self.__class__.__name__, "window", window)
+        validate_positive_integer(self.__class__.__name__, "scan_interval_us", scan_interval_us)
 
         super().__init__(
             increase=increase, patience=patience, window=window, scan_interval_us=scan_interval_us
@@ -142,11 +150,11 @@ class IOBottleneck(ProfilerRuleBase):
         :param patience: How many values to record before checking for IO bottlenecks. During training initilization, GPU is likely at 0 percent, so Rule should not check for underutilization immediatly. Default 1000.
         :param scan_interval_us: interval with which timeline files are scanned. Default is 60000000 us.
         """
-        validate_percentile("threshold", threshold)
-        validate_percentile("gpu_threshold", gpu_threshold)
-        validate_percentile("io_threshold", io_threshold)
-        validate_positive_integer("patience", patience)
-        validate_positive_integer("scan_interval_us", scan_interval_us)
+        validate_percentile(self.__class__.__name__, "threshold", threshold)
+        validate_percentile(self.__class__.__name__, "gpu_threshold", gpu_threshold)
+        validate_percentile(self.__class__.__name__, "io_threshold", io_threshold)
+        validate_positive_integer(self.__class__.__name__, "patience", patience)
+        validate_positive_integer(self.__class__.__name__, "scan_interval_us", scan_interval_us)
 
         super().__init__(
             threshold=threshold,
@@ -167,9 +175,9 @@ class LoadBalancing(ProfilerRuleBase):
         :param patience: how many values to record before checking for loadbalancing issues
         :param scan_interval_us: interval with which timeline files are scanned. Default is 60000000 us.
         """
-        validate_percentile("threshold", threshold)
-        validate_positive_integer("patience", patience)
-        validate_positive_integer("scan_interval_us", scan_interval_us)
+        validate_percentile(self.__class__.__name__, "threshold", threshold)
+        validate_positive_integer(self.__class__.__name__, "patience", patience)
+        validate_positive_integer(self.__class__.__name__, "scan_interval_us", scan_interval_us)
 
         super().__init__(threshold=threshold, patience=patience, scan_interval_us=scan_interval_us)
 
@@ -194,11 +202,11 @@ class LowGPUUtilization(ProfilerRuleBase):
         :param patience: How many values to record before checking for underutilization/fluctuations. During training initilization, GPU is likely at 0 percent, so Rule should not check for underutilization immediately. Default 1000.
         :param scan_interval_us: interval with which timeline files are scanned. Default is 60000000 us.
         """
-        validate_percentile("threshold_p95", threshold_p95)
-        validate_percentile("threshold_p5", threshold_p5)
-        validate_positive_integer("window", window)
-        validate_positive_integer("patience", patience)
-        validate_positive_integer("scan_interval_us", scan_interval_us)
+        validate_percentile(self.__class__.__name__, "threshold_p95", threshold_p95)
+        validate_percentile(self.__class__.__name__, "threshold_p5", threshold_p5)
+        validate_positive_integer(self.__class__.__name__, "window", window)
+        validate_positive_integer(self.__class__.__name__, "patience", patience)
+        validate_positive_integer(self.__class__.__name__, "scan_interval_us", scan_interval_us)
 
         super().__init__(
             threshold_p95=threshold_p95,
@@ -218,8 +226,8 @@ class MaxInitializationTime(ProfilerRuleBase):
         :param threshold: defines the threshold in minutes to wait for first step to become available. Default is 20 minutes.
         :param scan_interval_us: interval with which timeline files are scanned. Default is 60000000 us.
         """
-        validate_positive_integer("threshold", threshold)
-        validate_positive_integer("scan_interval_us", scan_interval_us)
+        validate_positive_integer(self.__class__.__name__, "threshold", threshold)
+        validate_positive_integer(self.__class__.__name__, "scan_interval_us", scan_interval_us)
 
         super().__init__(threshold=threshold, scan_interval_us=scan_interval_us)
 
@@ -234,7 +242,7 @@ class OverallSystemUsage(ProfilerRuleBase):
 
         :param scan_interval_us: interval with which timeline files are scanned. Default is 60000000 us.
         """
-        validate_positive_integer("scan_interval_us", scan_interval_us)
+        validate_positive_integer(self.__class__.__name__, "scan_interval_us", scan_interval_us)
         super().__init__(scan_interval_us=scan_interval_us)
 
 
@@ -247,10 +255,10 @@ class StepOutlier(ProfilerRuleBase):
         :param n_outliers: How many outliers to ignore before rule returns True. Default 10.
         :param scan_interval_us: interval with which timeline files are scanned. Default is 60000000 us.
         """
-        validate_positive_integer("stddev", stddev)
+        validate_positive_integer(self.__class__.__name__, "stddev", stddev)
         assert mode is None or isinstance(mode, str), "Mode must be a string if specified!"
-        validate_positive_integer("n_outliers", n_outliers)
-        validate_positive_integer("scan_interval_us", scan_interval_us)
+        validate_positive_integer(self.__class__.__name__, "n_outliers", n_outliers)
+        validate_positive_integer(self.__class__.__name__, "scan_interval_us", scan_interval_us)
 
         super().__init__(
             stddev=stddev, mode=mode, n_outliers=n_outliers, scan_interval_us=scan_interval_us
@@ -273,17 +281,36 @@ class ProfilerReport(ProfilerRuleBase):
 
         :param rule_parameters: Dictionary mapping rule + parameter name to value.
         """
-        invalid_key_format_error = (
-            "Key ({0}) does not follow naming scheme: <rule_name>_<parameter_name>"
-        )
-        invalid_rule_error = (
-            "{0} is an invalid rule name! Accepted rule names (case insensitive) are: {1}"
-        )
-        invalid_param_error = (
-            "{0} is an invalid parameter name! Accepted parameter names for {1} are: {2}"
-        )
 
-        rule_classes = [
+        rule_classes = ProfilerReport.get_rules()
+        rule_names = str([rule.__name__ for rule in rule_classes]).strip("[]")
+        rule_classes_by_name = {rule.__name__.lower(): rule for rule in rule_classes}
+
+        formatted_rule_parameters = {}
+
+        for key, val in rule_parameters.items():
+            assert key.count("_") >= 1, invalid_key_format_error.format(key)
+            rule_name, *parameter_name = key.split("_")
+            parameter_name = "_".join(parameter_name).lower()
+            assert rule_name.lower() in rule_classes_by_name, invalid_rule_error.format(
+                rule_name, rule_names
+            )
+            rule_class = rule_classes_by_name[rule_name.lower()]
+            try:
+                rule_class(**{parameter_name: val})
+            except TypeError:
+                rule_args = str(inspect.getfullargspec(rule_class.__init__)[0]).strip("[]")
+                raise TypeError(
+                    invalid_param_error.format(parameter_name, rule_class.__name__, rule_args)
+                )
+            formatted_key = f"{rule_class.__name__}_{parameter_name}"
+            formatted_rule_parameters[formatted_key] = val
+
+        super().__init__(custom_rule_parameters=formatted_rule_parameters)
+
+    @classmethod
+    def get_rules(cls):
+        return [
             BatchSize,
             CPUBottleneck,
             Dataloader,
@@ -295,24 +322,3 @@ class ProfilerReport(ProfilerRuleBase):
             OverallSystemUsage,
             StepOutlier,
         ]
-        rule_names = [rule.__name__ for rule in rule_classes]
-        rule_classes_by_name = {rule.__name__.lower(): rule for rule in rule_classes}
-
-        for key, val in rule_parameters.items():
-            assert key.count("_") >= 1, invalid_key_format_error.format(key)
-            rule_name, *parameter_name = key.split("_")
-            rule_name = rule_name.lower()
-            parameter_name = "_".join(parameter_name).lower()
-            assert rule_name in rule_classes_by_name, invalid_rule_error.format(
-                rule_name, rule_names
-            )
-            rule_class = rule_classes_by_name[rule_name]
-            try:
-                rule_class(**{parameter_name: val})
-            except TypeError:
-                rule_signature = inspect.signature(rule_class.__init__)
-                raise TypeError(
-                    invalid_param_error.format(parameter_name, rule_class.__name__, rule_signature)
-                )
-
-        super().__init__(**rule_parameters)
