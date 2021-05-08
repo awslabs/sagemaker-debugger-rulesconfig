@@ -258,7 +258,7 @@ class StepOutlier(ProfilerRuleBase):
 
 
 class ProfilerReport(ProfilerRuleBase):
-    def __init__(self, **rule_parameters):
+    def __init__(self, opt_out_telemetry=False, **rule_parameters):
         """
         This rule will create a profiler report after invoking all of the rules. The parameters
         used in any of these rules can be customized by following this naming scheme:
@@ -315,4 +315,4 @@ class ProfilerReport(ProfilerRuleBase):
                     invalid_param_error.format(parameter_name, rule_class.__name__, rule_signature)
                 )
 
-        super().__init__(**rule_parameters)
+        super().__init__(opt_out_telemetry=opt_out_telemetry, **rule_parameters)
