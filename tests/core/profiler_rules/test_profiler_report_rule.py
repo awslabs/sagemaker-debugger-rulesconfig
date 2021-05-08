@@ -3,6 +3,7 @@ import inspect
 
 from smdebug_rulesconfig.profiler_rules.rules import CPUBottleneck, ProfilerReport
 from smdebug_rulesconfig.profiler_rules.utils import (
+    invalid_boolean_error,
     invalid_key_format_error,
     invalid_param_error,
     invalid_rule_error,
@@ -23,6 +24,26 @@ def test_default_profiler_report_rule():
         "rule_to_invoke": ProfilerReport.__name__,
         "custom_rule_parameters": {},
     }
+
+
+def test_opt_out_flag_for_profiler_report_rule():
+    # Default Case
+    rule = ProfilerReport()
+    assert not rule.opt_out_telemetry
+
+    # Explicit Opt In
+    rule = ProfilerReport(opt_out_telemetry=False)
+    assert not rule.opt_out_telemetry
+
+    # Explicit Opt Out
+    rule = ProfilerReport(opt_out_telemetry=True)
+    assert rule.opt_out_telemetry
+
+    # Invalid Input
+    with pytest.raises(
+        AssertionError, match=invalid_boolean_error.format("ProfilerReport", "opt_out_telemetry")
+    ):
+        ProfilerReport(opt_out_telemetry="False")
 
 
 def test_valid_profiler_report_rule_custom_params():

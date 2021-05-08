@@ -4,6 +4,7 @@ from smdebug_rulesconfig.profiler_rules.utils import (
     invalid_key_format_error,
     invalid_rule_error,
     invalid_param_error,
+    validate_boolean,
     validate_percentile,
     validate_positive_integer,
 )
@@ -266,7 +267,7 @@ class StepOutlier(ProfilerRuleBase):
 
 
 class ProfilerReport(ProfilerRuleBase):
-    def __init__(self, **rule_parameters):
+    def __init__(self, opt_out_telemetry=False, **rule_parameters):
         """
         This rule will create a profiler report after invoking all of the rules. The parameters
         used in any of these rules can be customized by following this naming scheme:
@@ -285,6 +286,8 @@ class ProfilerReport(ProfilerRuleBase):
         rule_classes = ProfilerReport.get_rules()
         rule_names = str([rule.__name__ for rule in rule_classes]).strip("[]")
         rule_classes_by_name = {rule.__name__.lower(): rule for rule in rule_classes}
+        validate_boolean(self.__class__.__name__, "opt_out_telemetry", opt_out_telemetry)
+        self.opt_out_telemetry = opt_out_telemetry
 
         formatted_rule_parameters = {}
 
@@ -306,7 +309,9 @@ class ProfilerReport(ProfilerRuleBase):
             formatted_key = f"{rule_class.__name__}_{parameter_name}"
             formatted_rule_parameters[formatted_key] = val
 
-        super().__init__(custom_rule_parameters=formatted_rule_parameters)
+        super().__init__(
+            opt_out_telemetry=opt_out_telemetry, custom_rule_parameters=formatted_rule_parameters
+        )
 
     @classmethod
     def get_rules(cls):
