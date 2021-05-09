@@ -23,6 +23,7 @@ def test_default_profiler_report_rule():
     assert rule.rule_parameters == {
         "rule_to_invoke": ProfilerReport.__name__,
         "custom_rule_parameters": {},
+        "opt_out_telemetry": False
     }
 
 
@@ -52,6 +53,7 @@ def test_valid_profiler_report_rule_custom_params():
     assert rule.rule_parameters == {
         "rule_to_invoke": ProfilerReport.__name__,
         "custom_rule_parameters": {"CPUBottleneck_threshold": 30},
+        "opt_out_telemetry": False
     }
 
     # case of parameter doesn't matter
@@ -60,6 +62,7 @@ def test_valid_profiler_report_rule_custom_params():
     assert rule.rule_parameters == {
         "rule_to_invoke": ProfilerReport.__name__,
         "custom_rule_parameters": {"CPUBottleneck_threshold": 20},
+        "opt_out_telemetry": False
     }
 
 
