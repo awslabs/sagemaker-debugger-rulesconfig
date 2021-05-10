@@ -30,19 +30,31 @@ def test_default_profiler_report_rule():
 def test_opt_out_flag_for_profiler_report_rule():
     # Default Case
     rule = ProfilerReport()
-    assert not rule.opt_out_telemetry
+    assert rule.rule_parameters == {
+        "rule_to_invoke": ProfilerReport.__name__,
+        "custom_rule_parameters": {},
+        "opt_out_telemetry": False,
+    }
 
     # Explicit Opt In
     rule = ProfilerReport(opt_out_telemetry=False)
-    assert not rule.opt_out_telemetry
+    assert rule.rule_parameters == {
+        "rule_to_invoke": ProfilerReport.__name__,
+        "custom_rule_parameters": {},
+        "opt_out_telemetry": False,
+    }
 
     # Explicit Opt Out
     rule = ProfilerReport(opt_out_telemetry=True)
-    assert rule.opt_out_telemetry
+    assert rule.rule_parameters == {
+        "rule_to_invoke": ProfilerReport.__name__,
+        "custom_rule_parameters": {},
+        "opt_out_telemetry": True,
+    }
 
     # Invalid Input
     with pytest.raises(
-        AssertionError, match=invalid_boolean_error.format("ProfilerReport", "opt_out_telemetry")
+        AssertionError, match=invalid_boolean_error.format(ProfilerReport.__name__, "opt_out_telemetry")
     ):
         ProfilerReport(opt_out_telemetry="False")
 

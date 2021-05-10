@@ -287,7 +287,6 @@ class ProfilerReport(ProfilerRuleBase):
         rule_names = str([rule.__name__ for rule in rule_classes]).strip("[]")
         rule_classes_by_name = {rule.__name__.lower(): rule for rule in rule_classes}
         validate_boolean(self.__class__.__name__, "opt_out_telemetry", opt_out_telemetry)
-        self.opt_out_telemetry = opt_out_telemetry
 
         formatted_rule_parameters = {}
 
