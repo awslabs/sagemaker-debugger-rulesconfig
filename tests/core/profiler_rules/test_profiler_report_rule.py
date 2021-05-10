@@ -54,7 +54,8 @@ def test_opt_out_flag_for_profiler_report_rule():
 
     # Invalid Input
     with pytest.raises(
-        AssertionError, match=invalid_boolean_error.format(ProfilerReport.__name__, "opt_out_telemetry")
+        AssertionError,
+        match=invalid_boolean_error.format(ProfilerReport.__name__, "opt_out_telemetry"),
     ):
         ProfilerReport(opt_out_telemetry="False")
 
