@@ -3,6 +3,7 @@ import inspect
 
 from smdebug_rulesconfig.profiler_rules.rules import CPUBottleneck, ProfilerReport
 from smdebug_rulesconfig.profiler_rules.utils import (
+    invalid_boolean_error,
     invalid_key_format_error,
     invalid_param_error,
     invalid_rule_error,
@@ -22,7 +23,41 @@ def test_default_profiler_report_rule():
     assert rule.rule_parameters == {
         "rule_to_invoke": ProfilerReport.__name__,
         "custom_rule_parameters": {},
+        "opt_out_telemetry": False,
     }
+
+
+def test_opt_out_flag_for_profiler_report_rule():
+    # Default Case
+    rule = ProfilerReport()
+    assert rule.rule_parameters == {
+        "rule_to_invoke": ProfilerReport.__name__,
+        "custom_rule_parameters": {},
+        "opt_out_telemetry": False,
+    }
+
+    # Explicit Opt In
+    rule = ProfilerReport(opt_out_telemetry=False)
+    assert rule.rule_parameters == {
+        "rule_to_invoke": ProfilerReport.__name__,
+        "custom_rule_parameters": {},
+        "opt_out_telemetry": False,
+    }
+
+    # Explicit Opt Out
+    rule = ProfilerReport(opt_out_telemetry=True)
+    assert rule.rule_parameters == {
+        "rule_to_invoke": ProfilerReport.__name__,
+        "custom_rule_parameters": {},
+        "opt_out_telemetry": True,
+    }
+
+    # Invalid Input
+    with pytest.raises(
+        AssertionError,
+        match=invalid_boolean_error.format(ProfilerReport.__name__, "opt_out_telemetry"),
+    ):
+        ProfilerReport(opt_out_telemetry="False")
 
 
 def test_valid_profiler_report_rule_custom_params():
@@ -31,6 +66,7 @@ def test_valid_profiler_report_rule_custom_params():
     assert rule.rule_parameters == {
         "rule_to_invoke": ProfilerReport.__name__,
         "custom_rule_parameters": {"CPUBottleneck_threshold": 30},
+        "opt_out_telemetry": False,
     }
 
     # case of parameter doesn't matter
@@ -39,6 +75,7 @@ def test_valid_profiler_report_rule_custom_params():
     assert rule.rule_parameters == {
         "rule_to_invoke": ProfilerReport.__name__,
         "custom_rule_parameters": {"CPUBottleneck_threshold": 20},
+        "opt_out_telemetry": False,
     }
 
 
