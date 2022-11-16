@@ -3,7 +3,7 @@ import json
 
 
 TRAINING_JOB_PREFIX_REGEX = "^[A-Za-z0-9\-]+$"
-EMAIL_ADDRESS_REGEX = "^[a-z0-9]+[@]\w+[.]\w{2,3}$"
+EMAIL_ADDRESS_REGEX = r"^\w+(?:[\.-]?\w+)*@\w+(?:[\.-]?\w+)*(?:\.\w{2,3})+$"
 PHONE_NUMBER_REGEX = "^\+\d{1,15}$"
 
 
